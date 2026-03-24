@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\CSommet.h.obj",
+            "outputs": [
+                "D:\\MincrosoftVisualCodeProjects\\Project1\\ProjetCppAnaelle\\x64\\Debug\\vc145.pdb",
+                "x64\\Debug\\",
+                "D:\\MincrosoftVisualCodeProjects\\Project1\\ProjetCppAnaelle\\x64\\Debug\\CSommet.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "CSommet.h",
+                    "source-path": "d:\\mincrosoftvisualcodeprojects\\project1\\projetcppanaelle\\csommet.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

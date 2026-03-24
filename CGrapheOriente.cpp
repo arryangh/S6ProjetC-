@@ -1,0 +1,6 @@
+class CGrapheOriente {
+private:
+
+public:
+
+};
