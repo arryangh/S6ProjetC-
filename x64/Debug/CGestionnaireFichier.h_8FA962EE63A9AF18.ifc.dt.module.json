@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\CGestionnaireFichier.obj",
+            "outputs": [
+                "x64\\Debug\\CGestionnaireFichier.h_8FA962EE63A9AF18.ifc.dt.module.json",
+                "x64\\Debug\\CGestionnaireFichier.h_8FA962EE63A9AF18.ifc.dt.d.json",
+                "x64\\Debug\\CGestionnaireFichier.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "D:\\MincrosoftVisualCodeProjects\\Project1\\ProjetCppAnaelle\\CGestionnaireFichier.h",
+                    "source-path": "d:\\mincrosoftvisualcodeprojects\\project1\\projetcppanaelle\\cgestionnairefichier.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}
