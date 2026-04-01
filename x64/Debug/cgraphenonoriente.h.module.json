@@ -1,0 +1,22 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "x64\\Debug\\CGrapheNonOriente.h.obj",
+            "outputs": [
+                "D:\\MincrosoftVisualCodeProjects\\Project1\\ProjetCppAnaelle\\x64\\Debug\\vc145.pdb",
+                "x64\\Debug\\",
+                "D:\\MincrosoftVisualCodeProjects\\Project1\\ProjetCppAnaelle\\x64\\Debug\\CGrapheNonOriente.h.ifc"
+            ],
+            "provides": [
+                {
+                    "logical-name": "CGrapheNonOriente.h",
+                    "source-path": "d:\\mincrosoftvisualcodeprojects\\project1\\projetcppanaelle\\cgraphenonoriente.h",
+                    "lookup-method": "absolute"
+                }
+            ],
+            "requires": []
+        }
+    ]
+}

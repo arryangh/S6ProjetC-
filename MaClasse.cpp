@@ -29,6 +29,7 @@ public:
 
 };
 
+/*
 int main() {
 	Mere mere1;
 	Fille fille1;
@@ -37,3 +38,4 @@ int main() {
 	cout << fille1.LireAge() << endl;
 	
 }
+*/

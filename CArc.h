@@ -1,25 +1,44 @@
 #ifndef CArc_H
 #define CArc_H
 
+#include <iostream>
+
+class CSommet; // pas faire include "CSommet.h" parce que y aura dépendance mutuelle)
+
+using namespace std;
+
 class CArc {
 protected:
-	unsigned int uiSommetDep;
-	unsigned int uiSommetArr;
+	CSommet* SMTSommetDep;
+	CSommet* SMTSommetArr;
 
 public:
 	// const & dest
+
 	CArc();
-	CArc(unsigned int SommetDep, unsigned int SommetArr);
-	~CArc();
+
+	CArc(CSommet* s1, CSommet* s2) {
+		SMTSommetDep = s1;
+		SMTSommetArr = s2;
+	}
+
+	CArc(unsigned int SommetDep, unsigned int SommetArr); //par numéro (recherche dans graphe)
+	~CArc() {};
 
 	// méthodes 
 
+
+
+	// toString
+	string toString();
 
 	// accesseurs 
 	unsigned int LireSommetDep();
 	unsigned int LireSommetArr();
 	void ModifierSommetDep(unsigned int uiNumero);
 	void ModifierSommetArr(unsigned int uiNumero);
+
+	
 };
 
 #endif // !CArc_H

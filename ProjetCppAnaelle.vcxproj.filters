@@ -27,12 +27,24 @@
     <ClCompile Include="CSommet.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="CGestionnaireFichier.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CGrapheNonOriente.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CArc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CGrapheOriente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CAffichage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

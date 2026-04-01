@@ -1,8 +1,10 @@
 #ifndef CSommet_H
 #define CSommet_H
 
+#include <iostream>
 #include <vector>
 #include "CArc.h"
+#include <string>
 
 using namespace std;
 
@@ -14,17 +16,35 @@ protected:
 
 public:
 	// const & dest
-	CSommet();
-	CSommet(unsigned int SommetDep, unsigned int SommetArr);
-	CSommet(unsigned int numero);
+	CSommet(){} 
+	
+	CSommet(unsigned int numero) {
+		uiNumero = numero;
+	}
 
-	~CSommet();
+	// ne pas le mettre pour appeler le constructeur de recopie par défaut
+	// CSommet(CSommet& param){}
+
+	~CSommet(){} //devra supprimer les arcs de départ et d'arrivé
 
 	// méthodes 
 
 
+
+	// toString
+	string toString() {
+		string s = "";
+		s += "Sommet(";
+		s += to_string(uiNumero);
+		s += ")";
+		// s = "CSommet(uiNumero=" << getNumero() << ")" << endl;
+		return s;
+	}
+
 	// accesseurs 
-	unsigned int LireNumero();
+	unsigned int getNumero() {
+		return uiNumero;
+	}
 };
 
 #endif // !CSommet_H

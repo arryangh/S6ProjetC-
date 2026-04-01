@@ -18,7 +18,7 @@ protected:
 public:
 	// const & dest
 	CGrapheOriente();
-	~CGrapheOiente();
+	~CGrapheOriente();
 
 
 

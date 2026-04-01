@@ -128,11 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CArc.cpp" />
+    <ClCompile Include="CGestionnaireFichier.h" />
+    <ClCompile Include="CGrapheNonOriente.h" />
     <ClCompile Include="CGrapheOriente.cpp" />
     <ClCompile Include="CSommet.h" />
     <ClCompile Include="MaClasse.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CAffichage.h" />
     <ClInclude Include="CArc.h" />
     <ClInclude Include="CGrapheOriente.h" />
   </ItemGroup>
