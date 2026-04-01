@@ -4,11 +4,18 @@
 string CArc::toString() {
 	string s = "";
 	s += "Arc(dep:";
-	s += SMTSommetDep->toString();
+	s += to_string(SMTSommetDep->getNumero());
 	s += ", arr:";
-	s += SMTSommetArr->toString();
+	s += to_string(SMTSommetArr->getNumero());
 	s += ")";
 	return s;
+}
+CArc::CArc(CSommet* s1, CSommet* s2) {
+	SMTSommetDep = s1;
+	SMTSommetArr = s2;
+
+	SMTSommetDep->setvArcDep(this);
+	SMTSommetArr->setvArcArr(this);
 }
 
 

@@ -34,16 +34,35 @@ public:
 	// toString
 	string toString() {
 		string s = "";
-		s += "Sommet(";
-		s += to_string(uiNumero);
-		s += ")";
-		// s = "CSommet(uiNumero=" << getNumero() << ")" << endl;
+		s += "Sommet(" + to_string(uiNumero) + ")\n";
+
+		s += "  Arcs partants: ";
+		for (CArc* arc : vArcDep) {
+			s += arc->toString() + " ";
+		}
+		s += "\n";
+
+		s += "  Arcs arrivants: ";
+		for (CArc* arc : vArcArr) {
+			s += arc->toString() + " ";
+		}
+		s += "\n";
+
 		return s;
 	}
 
 	// accesseurs 
 	unsigned int getNumero() {
 		return uiNumero;
+	}
+
+	// setters
+	void setvArcDep(CArc* a) {
+		vArcDep.push_back(a);
+	}
+
+	void setvArcArr(CArc* a) {
+		vArcArr.push_back(a);
 	}
 };
 

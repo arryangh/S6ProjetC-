@@ -17,10 +17,7 @@ public:
 
 	CArc();
 
-	CArc(CSommet* s1, CSommet* s2) {
-		SMTSommetDep = s1;
-		SMTSommetArr = s2;
-	}
+	CArc(CSommet* s1, CSommet* s2);
 
 	CArc(unsigned int SommetDep, unsigned int SommetArr); //par numéro (recherche dans graphe)
 	~CArc() {};
