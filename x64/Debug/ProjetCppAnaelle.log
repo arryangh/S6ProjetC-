@@ -1,3 +1,35 @@
 ﻿  Scanning sources for module dependencies...
-  CArc.cpp
-  ProjetCppAnaelle.vcxproj -> D:\MincrosoftVisualCodeProjects\Project1\x64\Debug\ProjetCppAnaelle.exe
+  Compiling...
+  CGrapheNonOriente.h
+  CGestionnaireFichier.h
+  CSommet.h
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(26,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CGrapheNonOriente.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(27,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CGrapheNonOriente.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(26,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CGestionnaireFichier.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(27,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CGestionnaireFichier.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(26,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CSommet.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  
+D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(27,3): error C2027: use of undefined type 'CSommet'
+  (compiling source file 'CSommet.h')
+      D:\MincrosoftVisualCodeProjects\Project1\ProjetCppAnaelle\CArc.h(6,7):
+      see declaration of 'CSommet'
+  

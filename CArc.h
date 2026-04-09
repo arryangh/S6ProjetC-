@@ -15,12 +15,17 @@ protected:
 public:
 	// const & dest
 
-	CArc();
+	// CArc();
 
 	CArc(CSommet* s1, CSommet* s2);
 
-	CArc(unsigned int SommetDep, unsigned int SommetArr); //par numéro (recherche dans graphe)
-	~CArc() {};
+	//par numéro (recherche dans graphe)
+	CArc(unsigned int SommetDep, unsigned int SommetArr);
+		
+	~CArc() {
+		SMTSommetArr->retirerArcD(this);
+		SMTSommetDep->retirerArcA(this);
+	}
 
 	// méthodes 
 

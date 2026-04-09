@@ -30,7 +30,6 @@ public:
 	// méthodes 
 
 
-
 	// toString
 	string toString() {
 		string s = "";
@@ -56,14 +55,30 @@ public:
 		return uiNumero;
 	}
 
+	// getters (constate pour assurer de pas modifier CArc)
+	const vector<CArc*>& getvArcDep() const {
+		return vArcDep;
+	}
+
+	const vector<CArc*>& getvArcArr() const {
+		return vArcArr;
+	}
+	
+
 	// setters
 	void setvArcDep(CArc* a) {
 		vArcDep.push_back(a);
+
 	}
 
 	void setvArcArr(CArc* a) {
 		vArcArr.push_back(a);
 	}
+
+
+
+	
+
 };
 
 #endif // !CSommet_H
