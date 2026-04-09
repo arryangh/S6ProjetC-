@@ -27,7 +27,7 @@ public:
 		SMTSommetDep->retirerArcA(this);
 	}
 
-	// méthodes 
+	// méthodes  
 
 
 

@@ -97,7 +97,7 @@ void testArc3() {
 	cout << s2.toString() << endl;
 	cout << s3.toString() << endl;
 
-	
+	 
 }
 
 int main() {
