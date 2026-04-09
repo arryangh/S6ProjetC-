@@ -16,7 +16,7 @@ protected:
 
 public:
 	// const & dest
-	CSommet(){} 
+	// CSommet();
 	
 	CSommet(unsigned int numero) {
 		uiNumero = numero;
@@ -25,31 +25,20 @@ public:
 	// ne pas le mettre pour appeler le constructeur de recopie par défaut
 	// CSommet(CSommet& param){}
 
-	~CSommet(){} //devra supprimer les arcs de départ et d'arrivé
+	~CSommet();
 
 	// méthodes 
 
+	void retirerArcD(CArc* pArc) {
+		vArcDep.erase(remove(vArcDep.begin(), vArcDep.end(), pArc),vArcDep.end());
+	}
 
+	void retirerArcA(CArc* pArc) {
+		vArcArr.erase(remove(vArcArr.begin(), vArcArr.end(), pArc), vArcArr.end());
+	}
 
 	// toString
-	string toString() {
-		string s = "";
-		s += "Sommet(" + to_string(uiNumero) + ")\n";
-
-		s += "  Arcs partants: ";
-		for (CArc* arc : vArcDep) {
-			s += arc->toString() + " ";
-		}
-		s += "\n";
-
-		s += "  Arcs arrivants: ";
-		for (CArc* arc : vArcArr) {
-			s += arc->toString() + " ";
-		}
-		s += "\n";
-
-		return s;
-	}
+	string toString();
 
 	// accesseurs 
 	unsigned int getNumero() {
