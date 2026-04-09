@@ -22,10 +22,7 @@ public:
 	//par numéro (recherche dans graphe)
 	CArc(unsigned int SommetDep, unsigned int SommetArr);
 		
-	~CArc() {
-		SMTSommetArr->retirerArcD(this);
-		SMTSommetDep->retirerArcA(this);
-	}
+	~CArc();
 
 	// méthodes  
 

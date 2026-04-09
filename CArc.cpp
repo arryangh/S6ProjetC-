@@ -18,6 +18,11 @@ CArc::CArc(CSommet* s1, CSommet* s2) {
 	SMTSommetArr->setvArcArr(this);
 }
 
+CArc::~CArc() {
+	SMTSommetArr->retirerArcA(this);
+	SMTSommetDep->retirerArcD(this);
+}
+
 
 /*
 

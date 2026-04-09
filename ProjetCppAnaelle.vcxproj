@@ -131,6 +131,7 @@
     <ClCompile Include="CGestionnaireFichier.h" />
     <ClCompile Include="CGrapheNonOriente.h" />
     <ClCompile Include="CGrapheOriente.cpp" />
+    <ClCompile Include="CSommet.cpp" />
     <ClCompile Include="CSommet.h" />
     <ClCompile Include="MaClasse.cpp" />
     <ClCompile Include="main.cpp" />
