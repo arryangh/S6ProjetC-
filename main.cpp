@@ -65,6 +65,7 @@ void testArc2() {
 
 
 void testArc3() {
+	afficherMot("----------1ere etape-----------");
 	// s1
 	CSommet* s1 = new CSommet(1);
 
@@ -125,7 +126,6 @@ int main() {
 	//afficherMot("Aryan");
 	//testArc();
 	// testArc2();
-	afficherMot("----------1ere etape-----------");
 	testArc3();
 
 	return 0;
