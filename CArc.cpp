@@ -23,6 +23,14 @@ CArc::~CArc() {
 	SMTSommetDep->retirerArcD(this);
 }
 
+unsigned int CArc::LireSommetDep() {
+	return SMTSommetDep->getNumero(); // renovyer le numéro du sommet de départ
+}
+
+unsigned int CArc::LireSommetArr() {
+	return SMTSommetArr->getNumero(); // renovyer le numéro du sommet de d'arrivé
+}
+
 
 /*
 

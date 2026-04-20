@@ -12,15 +12,15 @@ CSommet::~CSommet() {
 // toString
 string CSommet::toString() {
 	string s = "";
-	s += "Sommet(" + to_string(uiNumero) + ")\n";
+	s += "    Sommet(" + to_string(uiNumero) + ")\n";
 
-	s += "  Arcs partants: ";
+	s += "        Arcs partants: ";
 	for (CArc* arc : vArcDep) {
 		s += arc->toString() + " ";
 	}
 	s += "\n";
 
-	s += "  Arcs arrivants: ";
+	s += "        Arcs arrivants: ";
 	for (CArc* arc : vArcArr) {
 		s += arc->toString() + " ";
 	}

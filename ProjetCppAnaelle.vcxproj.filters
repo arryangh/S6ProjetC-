@@ -18,9 +18,6 @@
     <ClCompile Include="MaClasse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGrapheOriente.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CArc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

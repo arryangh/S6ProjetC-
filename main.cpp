@@ -1,6 +1,7 @@
 #include <iostream>
 #include "CArc.h"
 #include "CSommet.h"
+#include "CGrapheOriente.h"
 
 
 using namespace std;
@@ -10,7 +11,7 @@ void afficherMot(string s) {
 }
 
 
-void testCSommet() {
+void test1CSommet() {
 	// s1
 	CSommet s1(1);
 	s1.toString();
@@ -27,7 +28,7 @@ void testCSommet() {
 
 }
 
-void testArc() {
+void test2Arc() {
 	
 	// s1
 	CSommet s1(1);
@@ -46,7 +47,7 @@ void testArc() {
 
 }
 
-void testArc2() {
+void test3Arc() {
 	// s1
 	CSommet s1(1);
 	
@@ -64,7 +65,7 @@ void testArc2() {
 }
 
 
-void testArc3() {
+void test4Arc() {
 	afficherMot("----------1ere etape-----------");
 	// s1
 	CSommet* s1 = new CSommet(1);
@@ -116,23 +117,43 @@ void testArc3() {
 	// affichage de tout les sommets
 	cout << s1->toString() << endl;
 	cout << s2->toString() << endl;
-	cout << s3->toString() << endl;
+	cout << s3->toString() << endl; // ça affiche Sommet(3722304989) après le "delete s3;"
 
 	 
 }
 
+void test5Graphe() {
+	afficherMot("----------  creation du graphe vide -----------");
+	CGrapheOriente<CSommet, CArc>* G1 = new CGrapheOriente<CSommet, CArc>();
+	cout << G1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des sommets -----------"); // avec numéro seulement
+	G1->AjouterSommet(1);
+	G1->AjouterSommet(2);
+	G1->AjouterSommet(3);
+	cout << G1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des arcs -----------"); // avec numéros seulement
+	// même schemin que le teste précédant (diapo disponible)
+	G1->AjouterArc(1, 2); // a1
+	G1->AjouterArc(2, 1); // a2
+	G1->AjouterArc(2, 3); // a3
+	G1->AjouterArc(3, 2); // a4
+	G1->AjouterArc(3, 1); // a5
+	G1->AjouterArc(1, 3); // a6
+	cout << G1->toString() << endl; // afficher graphe
+
+}
+
 int main() {
 	
-	//afficherMot("Aryan");
-	//testArc();
+	// afficherMot("Aryan");
+	// test3Arc();
 	// testArc2();
-	testArc3();
+	// test4Arc();
+	test5Graphe();
 
 	return 0;
 }
 
-// آناعل
-// آرین
-// تیبو
-// لویی
-// کلمان
+
