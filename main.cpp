@@ -117,7 +117,7 @@ void test4Arc() {
 	// affichage de tout les sommets
 	cout << s1->toString() << endl;
 	cout << s2->toString() << endl;
-	cout << s3->toString() << endl; // ça affiche Sommet(3722304989) après le "delete s3;"
+	// cout << s3->toString() << endl; // ça affiche Sommet(3722304989) après le "delete s3;"
 
 	 
 }
@@ -142,6 +142,17 @@ void test5Graphe() {
 	G1->AjouterArc(3, 1); // a5
 	G1->AjouterArc(1, 3); // a6
 	cout << G1->toString() << endl; // afficher graphe
+
+
+	afficherMot("----------  suppression sommets -----------"); // avec numéros seulement
+	G1->SupprimerSommet(3);
+	cout << G1->toString() << endl; // afficher graphe
+
+
+	afficherMot("----------  suppression arcs -----------"); // avec numéros seulement
+	G1->SupprimerArc(1, 2);
+	cout << G1->toString() << endl; // afficher graphe
+
 
 }
 

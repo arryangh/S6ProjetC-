@@ -72,13 +72,48 @@ public:
 	}
 
 	void SupprimerSommet(unsigned int uiNumero) {
-		// trouver le sommet (il faut le pointeur)
-		// le "delete"
+		// 1) trouver le sommet S* qu'on veut supprimer 
+		S* sommet = TrouverSommet(uiNumero);
+
+		
+		// si le sommet a été trouvé 
+		if (sommet != nullptr) { 
+			// 2) retirer les arcs A* du sommets qu'on veut supprimer de la liste "vArcs" du graphe
+			for (A* arc : sommet->getvArcDep()) { // retirer "les arcs de départ du sommet" des arcs du graphe
+				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+			}
+			for (A* arc : sommet->getvArcArr()) { // retirer "les arcs d'arrivé du sommet" des arcs du graphe
+				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+			}
+
+			// 3) retirer le sommet S* qu'on veut supprimer de la liste "vSommets" du graphe
+			vSommets.erase(remove(vSommets.begin(), vSommets.end(), sommet), vSommets.end());
+
+			// 4) le "delete"
+			delete sommet; // appelle le déstructeur de CSommet (supprime le sommet proprement en supprimant les arcs liées etc)
+		}
+		else {
+			cout << "CGrapheOriente.h->SupprimerSommet(): sommet " + to_string(uiNumero) + " non trouvé." << endl;
+		}
+
 	}
 
 	void SupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
-		// trouver l'arc (il faut le pointeur)
-		// le "delete"
+		// 1) trouver l'arc A* qu'on veut supprimer 
+		A* arc = TrouverArc(uiNumeroDepart, uiNumeroArrive);
+
+		// si l'arc a été trouvé 
+		if (arc != nullptr) {
+			// 2) retirer l'arc A* de de la liste "vArcs" du graphe
+			vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+
+			// 3) supprimer l'arc 
+			delete arc; // appèle le déstructeur qui enlève l'arc des sommets en question 
+		}
+		else {
+			cout << "CGrapheOriente.h->SupprimerArc(): l'arc (" + to_string(uiNumeroDepart) +", " + to_string(uiNumeroArrive) +") non trouvé." << endl;
+		}
+
 	}
 
 	void ModifierSommet(unsigned int uiNumero); // modifier par quoi? comment modifier un S*?
@@ -152,6 +187,7 @@ private:
 				return arc; // on renvoie le pointeur de l'arc
 			}
 		}
+		return nullptr;
 	}
 
 
