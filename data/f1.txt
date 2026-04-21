@@ -1,2 +1,12 @@
-Ceci est le fichier f1.txt
-c'est un fichier de test. Il contiendra un jour des graphes.
+NBSommets=3 
+NBArcs=3 
+Sommets=[ 
+Numero=1 
+Numero=2 
+Numero=3 
+] 
+Arcs=[ 
+Debut=1, Fin=2 
+Debut=2, Fin=3 
+Debut=3, Fin=1 
+]

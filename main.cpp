@@ -239,10 +239,38 @@ void test8ChargementFichier() {
 	// cout << std::filesystem::current_path() << endl;
 
 	CGestionnaireFichier* GF = new CGestionnaireFichier();
-	GF->AfficherFichier("data/f1.txt");
+	GF->AfficherContenuFichier("data/f1.txt");
 }
 
+
+void test9InterpreteurFichier() {
+	// création du gestionnaire de fichier 
+	CGestionnaireFichier* GF = new CGestionnaireFichier();
+
+	// utilisation de la méthode "InterpreterContenuFichier" du gestionnaire de fichier pour génerer le graphe
+	CGrapheOriente<CSommet, CArc>* G1 = GF->InterpreterContenuFichier("data/f1.txt");
+
+	// afficher le graphe géneré
+	cout << G1->toString() << endl; // afficher graphe
+}
+
+
+void test10InterpreteurFichier() {
+	// création du gestionnaire de fichier 
+	CGestionnaireFichier* GF = new CGestionnaireFichier();
+
+	// utilisation de la méthode "InterpreterContenuFichier" du gestionnaire de fichier pour génerer le graphe
+	CGrapheOriente<CSommet, CArc>* G1 = GF->GenererGrapheDepuisFichier("data/f1.txt");
+
+	// afficher le graphe géneré
+	cout << G1->toString() << endl; // afficher graphe
+}
+
+
+
+
 int main() {
+
 	
 	// afficherMot("Aryan");
 	// test3Arc();
@@ -251,7 +279,9 @@ int main() {
 	// test5Graphe();
 	// test6Graphe();
 	// test7Graphe();
-	test8ChargementFichier();
+	// test8ChargementFichier();
+	// test9InterpreteurFichier();
+	test10InterpreteurFichier();
 
 	return 0;
 }

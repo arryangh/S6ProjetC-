@@ -182,6 +182,12 @@ public:
 	void AfficherGraphe(); // liée à la classe CAffichage
 	
 
+	// graphe => string (pour faire par la suite => fichier.txt)
+	// faire un string respectant les conventions de fichier txt 
+	string GenererContenuTXT() {
+
+	}
+
 
 	// accesseurs 
 	unsigned int LireNumero();
