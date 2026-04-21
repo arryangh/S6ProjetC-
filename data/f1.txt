@@ -1,0 +1,2 @@
+Ceci est le fichier f1.txt
+c'est un fichier de test. Il contiendra un jour des graphes.

@@ -3,6 +3,8 @@
 #include "CSommet.h"
 #include "CGrapheOriente.h"
 #include "CGrapheNonOriente.h"
+#include "CGestionnaireFichier.h"
+#include <filesystem>
 
 
 using namespace std;
@@ -213,6 +215,33 @@ void test7Graphe() {
 
 }
 
+
+
+// ATTENTINION: Le programme doit être exécuté depuis le répertoire racine 
+// du projet afin que les chemins relatifs fonctionnent correctement.
+/*
+ProjetCppAnaelle/
+│
+├── data/
+│   └── f1.txt <-- les fichier text se trouvent ici
+│
+├── CArc.cpp
+├── CArc.h
+├── CSommet.cpp
+├── CSommet.h
+├── CGrapheOriente.h
+├── main.cpp
+└── ...
+*/
+void test8ChargementFichier() {
+	// #include <filesystem>
+	// #include "CGestionnaireFichier.h"
+	// cout << std::filesystem::current_path() << endl;
+
+	CGestionnaireFichier* GF = new CGestionnaireFichier();
+	GF->AfficherFichier("data/f1.txt");
+}
+
 int main() {
 	
 	// afficherMot("Aryan");
@@ -221,7 +250,8 @@ int main() {
 	// test4Arc();
 	// test5Graphe();
 	// test6Graphe();
-	test7Graphe();
+	// test7Graphe();
+	test8ChargementFichier();
 
 	return 0;
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include "CGrapheOriente.h"
+#include <fstream>
 
 using namespace std;
 
@@ -14,8 +15,12 @@ protected:
 
 public:
 	// const & dest
-	CGestionnaireFichier();
-	~CGestionnaireFichier();
+	CGestionnaireFichier() {
+
+	}
+	~CGestionnaireFichier() {
+
+	}
 
 	/*
 	* Charge un fichier texte à partir du chemin donné en paramètre et renvoie 
@@ -23,6 +28,21 @@ public:
 	*/
 	string ChargerDepuisFichier(string sPath) {
 
+	}
+
+
+	void AfficherFichier(const string& chemin) {
+		ifstream fichier(chemin);
+
+		if (!fichier) {
+			cerr << "Erreur : impossible d'ouvrir le fichier." << endl;
+			return;
+		}
+
+		string ligne;
+		while (getline(fichier, ligne)) {
+			cout << ligne << endl;
+		}
 	}
 
 
