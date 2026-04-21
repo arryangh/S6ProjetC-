@@ -38,8 +38,6 @@ public:
 		vSommets.push_back(s);
 	}
 
-
-
 	void AjouterArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		// 1) trouver sommetDepart (il faut le pointeur)
 		S* sommetDep = TrouverSommet(uiNumeroDepart);
@@ -120,14 +118,69 @@ public:
 		// trouver le sommet (il faut le pointeur)
 		// appeler des méthode sur du S générique (des attribut en plus modifiables, numero modifiable etc)
 
-	void ModifierArc(unsigned int oldND, unsigned int OldNA, 
-		unsigned int newND, unsigned int newNA);
-		// trouver l'arc(oldND, OldNA) (il faut le pointeur) 
-		// supprimer l'arc 
-		// créer un autre arc(newND, newNA)
+
+
+	/*
+	* remarque: si un utilisateur veut vraiment modifier un arc avec des données en plus, il peut appeler directement des setters sur l'arc en question.
+	*/
+	void ModifierArc(unsigned int oldND, unsigned int oldNA, unsigned int newND, unsigned int newNA) {
+		// 1) vérifier que l'arc à modifier existe
+		A* arc = TrouverArc(oldND, oldNA);
+		if (arc == nullptr) {
+			cout << "GrapheOriente.h->ModifierArc(): l'arc a modifier: (" + to_string(oldND) + ", " + to_string(oldNA) + ") n'existe pas." << endl;
+			return;
+		}
+
+		// 2) vérifier que le nouvel arc n'existe pas déjà
+		A* arcExistant = TrouverArc(newND, newNA);
+		if (arcExistant != nullptr) {
+			cout << "GrapheOriente.h->ModifierArc(): l'arc a créer: (" + to_string(newND) + ", " + to_string(newNA) + ") existe déjà." << endl;
+			return;
+		}
+
+		// 3) vérifier que les nouveaux sommets existent
+		if (TrouverSommet(newND) == nullptr || TrouverSommet(newNA) == nullptr) {
+			cout << "GrapheOriente.h->ModifierArc(): un des sommets de destination n'existe pas." << endl;
+			return;
+		}
+
+		// 4) tout est ok, on modifie
+		SupprimerArc(oldND, oldNA);
+		AjouterArc(newND, newNA);
+	}
+
+	// que pour les graphes orientés
+	CGrapheOriente<S, A>* InverserGraphe() {
+		/*
+		utiliser "ModifierArc" pour inverser tout les arcs 
+		comment faire si il y a: s1 <=> s2 (y aura l'erreur: l'arc à créer existe déjà)
+
+		SOLUTION: ne pas utiliser la méthode "ModifierArc". au lieu de ça, on peut juste faire une copie du graphe 
+		avec tout les sommets à l'identique, on va juste inverser les graphes qui les lient entre eux:
+		*/
+
+		// 1) création du copy de graphe (vide au début) 
+		CGrapheOriente<S, A>* grapheInverse = new CGrapheOriente<S, A>();
+
+		// 2) copie à l'identique de tout les sommets générique S* 
+		for (S* sommet : vSommets) {
+			unsigned int numSommet = sommet->getNumero(); // le numéro du sommet à recopier (créer l'équivalent)
+			grapheInverse->AjouterSommet(numSommet); // création de l'équivalent dans "grapheInverse"
+		}
+
+		// 3) copier l'inverse des arcs (inverser les numDep et numArr)
+		for (A* arc : vArcs) {
+			unsigned int numDep = arc->LireSommetDep(); 
+			unsigned int numArr = arc->LireSommetArr();
+			grapheInverse->AjouterArc(numArr, numDep);
+		}
+
+		return grapheInverse;
+	}
+
 
 	void AfficherGraphe(); // liée à la classe CAffichage
-	void InverserGraphe();
+	
 
 
 	// accesseurs 

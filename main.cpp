@@ -2,6 +2,7 @@
 #include "CArc.h"
 #include "CSommet.h"
 #include "CGrapheOriente.h"
+#include "CGrapheNonOriente.h"
 
 
 using namespace std;
@@ -153,6 +154,62 @@ void test5Graphe() {
 	G1->SupprimerArc(1, 2);
 	cout << G1->toString() << endl; // afficher graphe
 
+	
+	afficherMot("----------  modification d'arcs -----------"); // avec numéros seulement
+	G1->ModifierArc(2, 1, 1, 2); // Arc(2, 1) => Arc(1, 2)
+	cout << G1->toString() << endl; // afficher graphe
+
+}
+
+// inverser un graphe
+void test6Graphe() {
+	afficherMot("----------  creation du graphe vide -----------");
+	CGrapheOriente<CSommet, CArc>* G1 = new CGrapheOriente<CSommet, CArc>();
+	cout << G1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des sommets -----------"); // avec numéro seulement
+	G1->AjouterSommet(1);
+	G1->AjouterSommet(2);
+	G1->AjouterSommet(3);
+	cout << G1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des arcs -----------"); // avec numéros seulement
+	// même schemin que le teste précédant (diapo disponible)
+	G1->AjouterArc(1, 2); // a1
+	G1->AjouterArc(2, 3); // a3
+	G1->AjouterArc(3, 1); // a5
+	G1->AjouterArc(1, 3); // a6
+	cout << G1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  inverser le graphe -----------"); 
+	CGrapheOriente<CSommet, CArc>* G2 = G1->InverserGraphe();
+	cout << G2->toString() << endl; // afficher graphe
+}
+
+
+void test7Graphe() {
+	afficherMot("----------  creation du graphe non oriente vide -----------");
+	CGrapheNonOriente<CSommet, CArc>* GN1 = new CGrapheNonOriente<CSommet, CArc>();
+	cout << GN1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des sommets -----------"); // avec numéro seulement
+	GN1->AjouterSommet(1);
+	GN1->AjouterSommet(2);
+	GN1->AjouterSommet(3);
+	cout << GN1->toString() << endl; // afficher graphe
+
+	afficherMot("----------  creation des arrets (double arcs) -----------"); // avec numéros seulement
+	// même schemin que le teste précédant (diapo disponible)
+	GN1->AjouterArc(1, 2); // arret1
+	GN1->AjouterArc(2, 3); // arret2
+	GN1->AjouterArc(3, 1); // arret3
+	cout << GN1->toString() << endl; // afficher graphe
+
+	/*
+	afficherMot("----------  inverser le graphe -----------");
+	CGrapheOriente<CSommet, CArc>* G2 = G1->InverserGraphe();
+	cout << G2->toString() << endl; // afficher graphe
+	*/
 
 }
 
@@ -162,7 +219,9 @@ int main() {
 	// test3Arc();
 	// testArc2();
 	// test4Arc();
-	test5Graphe();
+	// test5Graphe();
+	// test6Graphe();
+	test7Graphe();
 
 	return 0;
 }

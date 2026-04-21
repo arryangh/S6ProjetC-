@@ -21,7 +21,9 @@ public:
 	* Charge un fichier texte à partir du chemin donné en paramètre et renvoie 
 	* son contenu sous forme de chaine de caractère 
 	*/
-	string ChargerDepuisFichier(string sPath);
+	string ChargerDepuisFichier(string sPath) {
+
+	}
 
 
 	/*
