@@ -15,6 +15,7 @@ private:
     int nbArcsAttendu; // le nombre d'arc déclaré au début du fichier
     vector<int> sommets; // les numéros de sommets trouvé dans le fichier (dans la section Sommets=[...])
     vector<pair<int, int>> arcs; // les pairs de numéros (Debut, Fin) trouvé dans la section Arcs=[...]
+    CGrapheOriente<CSommet, CArc>* G;
 
 public:
 	// const & dest
@@ -25,6 +26,9 @@ public:
 	~CGestionnaireFichier() {
 
 	}
+
+
+    // méthodes 
 
 
     // juste pour afficher le contenu du fichier text brut (pour visualiser)
@@ -99,7 +103,7 @@ public:
             return false;
         }
 
-        cout << "la coherance des donnees verifie avec succes" << endl;
+        cout << "2) la coherance des donnees verifie avec succes" << endl;
 
         return true;
     }
@@ -116,12 +120,19 @@ public:
             graphe->AjouterArc(arc.first, arc.second);
         }
 
+        cout << "3) graphe genere avec succes" << endl;
+
+        CGestionnaireFichier::G = graphe; // est ce que c'est vraiment utile de l'avoir en attribut? 
+        // bien faire attention au fait que c'est un pointeur vers le même graphe en mémoire, peut être qu'il fallait 
+        // gérer ça avec "const" avec une histoire de copie etc, à voir
+
         return graphe;
     }
 
 
     // apelle des méthodes 1,2,3
     CGrapheOriente<CSommet, CArc>* GenererGrapheDepuisFichier(string sPath) {
+        cout << "lecture de fichier et generation de graphe..." << endl;
         CollectionDonneesFichierTXT(sPath); // 1)
         if (VerificationCoheranceDesDonnees()) { // 2)
             return InstancierLeGraphe(); //3)
@@ -129,91 +140,11 @@ public:
         return nullptr; // si 2 renvoie false
     }
 
-
-
-	// 1, 2, 3 (le tout dans la même fonction)
-    CGrapheOriente<CSommet, CArc>* InterpreterContenuFichier(string sPath) {
-        ifstream fichier(sPath);
-
-        if (!fichier) {
-            cerr << "Erreur : impossible d'ouvrir le fichier." << endl;
-            return nullptr;
-        }
-
-        int nbSommetsAttendu = 0;
-        int nbArcsAttendu = 0;
-        vector<int> sommets;
-        vector<pair<int, int>> arcs;
-
-        string ligne;
-        while (getline(fichier, ligne)) {
-            // supprimer les espaces en fin de ligne (problème fréquent avec les fichiers texte)
-            if (!ligne.empty() && ligne.back() == ' ')
-                ligne.pop_back();
-
-            if (ligne.find("NBSommets=") != string::npos) {
-                nbSommetsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
-            }
-            else if (ligne.find("NBArcs=") != string::npos) {
-                nbArcsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
-            }
-            else if (ligne.find("Numero=") != string::npos) {
-                // lignes de type: Numero=1 => stoi("1)
-                int numero = stoi(ligne.substr(ligne.find("=") + 1));
-                sommets.push_back(numero);
-            }
-            else if (ligne.find("Debut=") != string::npos) {
-                // lignes de type: "Debut=1, Fin=2" => stoi("1, Fin=2) = stoi("1") car stoi s'arrête dès qu'il y a pas un numéro
-                int numDeb = stoi(ligne.substr(ligne.find("Debut=") + 6));
-                int numFin = stoi(ligne.substr(ligne.find("Fin=") + 4));
-                arcs.push_back(make_pair(numDeb, numFin));
-            }
-        }
-
-        // vérifications
-        if ((int)sommets.size() != nbSommetsAttendu) {
-            cerr << "Erreur : nombre de sommets détectés (" << sommets.size()
-                << ") ne correspond pas à celui déclaré (" << nbSommetsAttendu << ")." << endl;
-            return nullptr;
-        }
-        if ((int)arcs.size() != nbArcsAttendu) {
-            cerr << "Erreur : nombre d'arcs détectés (" << arcs.size()
-                << ") ne correspond pas à celui déclaré (" << nbArcsAttendu << ")." << endl;
-            return nullptr;
-        }
-
-        // créer le graphe
-        CGrapheOriente<CSommet, CArc>* graphe = new CGrapheOriente<CSommet, CArc>();
-
-        for (int numero : sommets) {
-            graphe->AjouterSommet(numero);
-        }
-        for (pair<int, int> arc : arcs) {
-            graphe->AjouterArc(arc.first, arc.second);
-        }
-
-        return graphe;
-    }
-
-
-    
-
-
-	// méthodes 
-
-
 	// accesseurs 
 
 };
 
 
-/*
-* Charge un fichier texte à partir du chemin donné en paramètre et renvoie
-* son contenu sous forme de chaine de caractère
-string ChargerDepuisFichier(string sPath) {
-
-}
-*/
 
 
 #endif // !1

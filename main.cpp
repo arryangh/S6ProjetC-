@@ -248,21 +248,12 @@ void test9InterpreteurFichier() {
 	CGestionnaireFichier* GF = new CGestionnaireFichier();
 
 	// utilisation de la méthode "InterpreterContenuFichier" du gestionnaire de fichier pour génerer le graphe
-	CGrapheOriente<CSommet, CArc>* G1 = GF->InterpreterContenuFichier("data/f1.txt");
-
-	// afficher le graphe géneré
-	cout << G1->toString() << endl; // afficher graphe
-}
-
-
-void test10InterpreteurFichier() {
-	// création du gestionnaire de fichier 
-	CGestionnaireFichier* GF = new CGestionnaireFichier();
-
-	// utilisation de la méthode "InterpreterContenuFichier" du gestionnaire de fichier pour génerer le graphe
 	CGrapheOriente<CSommet, CArc>* G1 = GF->GenererGrapheDepuisFichier("data/f1.txt");
+	
 
 	// afficher le graphe géneré
+	cout << "\n" << endl;
+
 	cout << G1->toString() << endl; // afficher graphe
 }
 
@@ -280,8 +271,8 @@ int main() {
 	// test6Graphe();
 	// test7Graphe();
 	// test8ChargementFichier();
-	// test9InterpreteurFichier();
-	test10InterpreteurFichier();
+	test9InterpreteurFichier();
+
 
 	return 0;
 }
