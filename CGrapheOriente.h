@@ -114,7 +114,9 @@ public:
 
 	}
 
-	void ModifierSommet(unsigned int uiNumero); // modifier par quoi? comment modifier un S*?
+	// ==> changer le numéro d'un sommet (ou d'autres attributs avancé ajouté par la classe fille de l'utilisateur)
+
+	void ModifierSommet(unsigned int uiNumero); // modifier par quoi? comment modifier un S*? 
 		// trouver le sommet (il faut le pointeur)
 		// appeler des méthode sur du S générique (des attribut en plus modifiables, numero modifiable etc)
 
@@ -190,8 +192,10 @@ public:
 
 
 	// accesseurs 
+	/*
 	unsigned int LireNumero();
-
+	*/
+	
 
 
 	//	vector<S*>vSommets;

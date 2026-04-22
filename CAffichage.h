@@ -17,6 +17,12 @@ public:
 	// méthodes 
 	void AfficherGraphe();
 
+	/*
+	* void AfficherGraphe(CGrapheOriente<S, A>* G);
+	* void AfficherSommet(S* sommet);
+	* void AfficherArc(A* arc);
+	*/
+
 	// accesseurs 
 
 };

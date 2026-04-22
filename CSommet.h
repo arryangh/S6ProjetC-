@@ -10,7 +10,7 @@ using namespace std;
 
 class CSommet {
 protected:
-	unsigned uiNumero;
+	unsigned int uiNumero;
 	vector<CArc*>vArcDep; //vecteur contenant les pointeur de type CArc* (les arcs sortant)
 	vector<CArc*>vArcArr; //vecteur contenant les pointeur de type CArc* (les arcs entrant)
 

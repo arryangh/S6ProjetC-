@@ -19,8 +19,11 @@ public:
 
 	CArc(CSommet* s1, CSommet* s2);
 
+	/*
 	//par numéro (recherche dans graphe)
 	CArc(unsigned int SommetDep, unsigned int SommetArr);
+	*/
+
 		
 	~CArc();
 
@@ -34,11 +37,15 @@ public:
 	// accesseurs 
 	unsigned int LireSommetDep();
 	unsigned int LireSommetArr();
+
+	/*
 	void ModifierSommetDep(unsigned int uiNumero);
 	void ModifierSommetArr(unsigned int uiNumero);
+	*/
+
 
 	
-};
+}; 
 
 #endif // !CArc_H
 
