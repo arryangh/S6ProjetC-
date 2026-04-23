@@ -1,15 +1,6 @@
 #include "CArc.h"
 #include "CSommet.h"   // ici c'est ok, pas de circularité
 
-string CArc::toString() {
-	string s = "";
-	s += "Arc(dep:";
-	s += to_string(SMTSommetDep->getNumero());
-	s += ", arr:";
-	s += to_string(SMTSommetArr->getNumero());
-	s += ")";
-	return s;
-}
 CArc::CArc(CSommet* s1, CSommet* s2) {
 	SMTSommetDep = s1;
 	SMTSommetArr = s2;
@@ -21,6 +12,16 @@ CArc::CArc(CSommet* s1, CSommet* s2) {
 CArc::~CArc() {
 	SMTSommetArr->retirerArcA(this);
 	SMTSommetDep->retirerArcD(this);
+}
+
+string CArc::toString() {
+	string s = "";
+	s += "Arc(dep:";
+	s += to_string(SMTSommetDep->getNumero());
+	s += ", arr:";
+	s += to_string(SMTSommetArr->getNumero());
+	s += ")";
+	return s;
 }
 
 unsigned int CArc::LireSommetDep() {

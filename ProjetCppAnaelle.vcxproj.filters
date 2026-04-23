@@ -36,6 +36,9 @@
     <ClCompile Include="CSommet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CGestionnaireFichier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CArc.h">
