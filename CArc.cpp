@@ -5,43 +5,29 @@ CArc::CArc(CSommet* s1, CSommet* s2) {
 	SMTSommetDep = s1;
 	SMTSommetArr = s2;
 
-	SMTSommetDep->setvArcDep(this);
-	SMTSommetArr->setvArcArr(this);
+	SMTSommetDep->SOMsetvArcDep(this);
+	SMTSommetArr->SOMsetvArcArr(this);
 }
 
 CArc::~CArc() {
-	SMTSommetArr->retirerArcA(this);
-	SMTSommetDep->retirerArcD(this);
+	SMTSommetArr->SOMretirerArcA(this);
+	SMTSommetDep->SOMretirerArcD(this);
 }
 
-string CArc::toString() {
+string CArc::ARCtoString() {
 	string s = "";
 	s += "Arc(dep:";
-	s += to_string(SMTSommetDep->getNumero());
+	s += to_string(SMTSommetDep->SOMgetNumero());
 	s += ", arr:";
-	s += to_string(SMTSommetArr->getNumero());
+	s += to_string(SMTSommetArr->SOMgetNumero());
 	s += ")";
 	return s;
 }
 
-unsigned int CArc::LireSommetDep() {
-	return SMTSommetDep->getNumero(); // renovyer le numéro du sommet de départ
+unsigned int CArc::ARCLireSommetDep() {
+	return SMTSommetDep->SOMgetNumero(); // renovyer le numéro du sommet de départ
 }
 
-unsigned int CArc::LireSommetArr() {
-	return SMTSommetArr->getNumero(); // renovyer le numéro du sommet de d'arrivé
+unsigned int CArc::ARCLireSommetArr() {
+	return SMTSommetArr->SOMgetNumero(); // renovyer le numéro du sommet de d'arrivé
 }
-
-
-/*
-
-	string toString() {
-		string s = "";
-		s += "Sommet(";
-		s += to_string(uiNumero);
-		s += ")";
-		// s = "CSommet(uiNumero=" << getNumero() << ")" << endl;
-		return s;
-	}
-
-*/

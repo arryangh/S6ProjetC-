@@ -1,14 +1,29 @@
-#ifndef CGrapheOriente_H
-#define CGrapheOriente_H
+#ifndef PGrapheOriente_H
+#define PGrapheOriente_H
 
+
+// à modifier: 
+/*********************************************************************************
+* PATRON : PGrapheOriente
+* ********************************************************************************
+* ROLE: Chaque instance de cette classe représante un sommet dans un graphe. Chaque
+*	    Sommet dispose au moins un vector de arc de départ et un vector d'arc d'arrivé.
+*       Cette classe est conçue pour être surchargée par d'autres classes filles.
+* ********************************************************************************
+* VERSION: 1.0
+* AUTEUR: Anaëlle BENOIST & Aryan GHALEHNOEE
+* DATE:
+* ********************************************************************************
+* INCLUSIONS EXTERNES:
+*/
 #include <vector>
 #include "CSommet.h"
 #include "CArc.h"
 
 
-// patron de classe CGrapheOriente
+// patron de classe PGrapheOriente
 template <class S, class A>
-class CGrapheOriente {
+class PGrapheOriente {
 protected:
 	vector<S*>vSommets; // le vecteur contenant les pointeurs de type générique S (sommet)
 	vector<A*>vArcs; // le vecteur contenant les pointeurs de type générique A (Arc)
@@ -17,18 +32,18 @@ protected:
 
 public:
 	// const & dest
-	CGrapheOriente() {
+	PGrapheOriente() {
 		// vide pour l'instant
 	}
 
-	~CGrapheOriente() {
+	~PGrapheOriente() {
 		// vide pour l'instant
 	}
 
 
 
 	// méthodes 
-	void AjouterSommet(unsigned int uiNumero) {
+	void GORAjouterSommet(unsigned int uiNumero) {
 		// CSommet* s1 = new CSommet(1);
 
 		// créer le sommet générique "S" (en utilisant un pointeur)
@@ -38,12 +53,12 @@ public:
 		vSommets.push_back(s);
 	}
 
-	void AjouterArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
+	void GORAjouterArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		// 1) trouver sommetDepart (il faut le pointeur)
-		S* sommetDep = TrouverSommet(uiNumeroDepart);
+		S* sommetDep = GORTrouverSommet(uiNumeroDepart);
 
 		// 2) trouver sommetArrive (il faut le pointeur) 
-		S* sommetArr = TrouverSommet(uiNumeroArrive);
+		S* sommetArr = GORTrouverSommet(uiNumeroArrive);
 
 
 		// 3) créer l'arc avec ces sommets de départs arrivés
@@ -69,18 +84,18 @@ public:
 		// fait directement à l'étape 3 avec le push_back
 	}
 
-	void SupprimerSommet(unsigned int uiNumero) {
+	void GORSupprimerSommet(unsigned int uiNumero) {
 		// 1) trouver le sommet S* qu'on veut supprimer 
-		S* sommet = TrouverSommet(uiNumero);
+		S* sommet = GORTrouverSommet(uiNumero);
 
 		
 		// si le sommet a été trouvé 
 		if (sommet != nullptr) { 
 			// 2) retirer les arcs A* du sommets qu'on veut supprimer de la liste "vArcs" du graphe
-			for (A* arc : sommet->getvArcDep()) { // retirer "les arcs de départ du sommet" des arcs du graphe
+			for (A* arc : sommet->SOMgetvArcDep()) { // retirer "les arcs de départ du sommet" des arcs du graphe
 				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
 			}
-			for (A* arc : sommet->getvArcArr()) { // retirer "les arcs d'arrivé du sommet" des arcs du graphe
+			for (A* arc : sommet->SOMgetvArcArr()) { // retirer "les arcs d'arrivé du sommet" des arcs du graphe
 				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
 			}
 
@@ -91,14 +106,14 @@ public:
 			delete sommet; // appelle le déstructeur de CSommet (supprime le sommet proprement en supprimant les arcs liées etc)
 		}
 		else {
-			cout << "CGrapheOriente.h->SupprimerSommet(): sommet " + to_string(uiNumero) + " non trouvé." << endl;
+			cout << "PGrapheOriente.h->SupprimerSommet(): sommet " + to_string(uiNumero) + " non trouvé." << endl;
 		}
 
 	}
 
-	void SupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
+	void GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		// 1) trouver l'arc A* qu'on veut supprimer 
-		A* arc = TrouverArc(uiNumeroDepart, uiNumeroArrive);
+		A* arc = GORTrouverArc(uiNumeroDepart, uiNumeroArrive);
 
 		// si l'arc a été trouvé 
 		if (arc != nullptr) {
@@ -109,14 +124,14 @@ public:
 			delete arc; // appèle le déstructeur qui enlève l'arc des sommets en question 
 		}
 		else {
-			cout << "CGrapheOriente.h->SupprimerArc(): l'arc (" + to_string(uiNumeroDepart) +", " + to_string(uiNumeroArrive) +") non trouvé." << endl;
+			cout << "PGrapheOriente.h->SupprimerArc(): l'arc (" + to_string(uiNumeroDepart) +", " + to_string(uiNumeroArrive) +") non trouvé." << endl;
 		}
 
 	}
 
 	// ==> changer le numéro d'un sommet (ou d'autres attributs avancé ajouté par la classe fille de l'utilisateur)
 
-	void ModifierSommet(unsigned int uiNumero); // modifier par quoi? comment modifier un S*? 
+	void GORModifierSommet(unsigned int uiNumero); // modifier par quoi? comment modifier un S*? 
 		// trouver le sommet (il faut le pointeur)
 		// appeler des méthode sur du S générique (des attribut en plus modifiables, numero modifiable etc)
 
@@ -125,34 +140,34 @@ public:
 	/*
 	* remarque: si un utilisateur veut vraiment modifier un arc avec des données en plus, il peut appeler directement des setters sur l'arc en question.
 	*/
-	void ModifierArc(unsigned int oldND, unsigned int oldNA, unsigned int newND, unsigned int newNA) {
+	void GORModifierArc(unsigned int oldND, unsigned int oldNA, unsigned int newND, unsigned int newNA) {
 		// 1) vérifier que l'arc à modifier existe
-		A* arc = TrouverArc(oldND, oldNA);
+		A* arc = GORTrouverArc(oldND, oldNA);
 		if (arc == nullptr) {
 			cout << "GrapheOriente.h->ModifierArc(): l'arc a modifier: (" + to_string(oldND) + ", " + to_string(oldNA) + ") n'existe pas." << endl;
 			return;
 		}
 
 		// 2) vérifier que le nouvel arc n'existe pas déjà
-		A* arcExistant = TrouverArc(newND, newNA);
+		A* arcExistant = GORTrouverArc(newND, newNA);
 		if (arcExistant != nullptr) {
 			cout << "GrapheOriente.h->ModifierArc(): l'arc a créer: (" + to_string(newND) + ", " + to_string(newNA) + ") existe déjà." << endl;
 			return;
 		}
 
 		// 3) vérifier que les nouveaux sommets existent
-		if (TrouverSommet(newND) == nullptr || TrouverSommet(newNA) == nullptr) {
+		if (GORTrouverSommet(newND) == nullptr || GORTrouverSommet(newNA) == nullptr) {
 			cout << "GrapheOriente.h->ModifierArc(): un des sommets de destination n'existe pas." << endl;
 			return;
 		}
 
 		// 4) tout est ok, on modifie
-		SupprimerArc(oldND, oldNA);
-		AjouterArc(newND, newNA);
+		GORSupprimerArc(oldND, oldNA);
+		GORAjouterArc(newND, newNA);
 	}
 
 	// que pour les graphes orientés
-	CGrapheOriente<S, A>* InverserGraphe() {
+	PGrapheOriente<S, A>* GORInverserGraphe() {
 		/*
 		utiliser "ModifierArc" pour inverser tout les arcs 
 		comment faire si il y a: s1 <=> s2 (y aura l'erreur: l'arc à créer existe déjà)
@@ -162,31 +177,31 @@ public:
 		*/
 
 		// 1) création du copy de graphe (vide au début) 
-		CGrapheOriente<S, A>* grapheInverse = new CGrapheOriente<S, A>();
+		PGrapheOriente<S, A>* grapheInverse = new PGrapheOriente<S, A>();
 
 		// 2) copie à l'identique de tout les sommets générique S* 
 		for (S* sommet : vSommets) {
-			unsigned int numSommet = sommet->getNumero(); // le numéro du sommet à recopier (créer l'équivalent)
-			grapheInverse->AjouterSommet(numSommet); // création de l'équivalent dans "grapheInverse"
+			unsigned int numSommet = sommet->SOMgetNumero(); // le numéro du sommet à recopier (créer l'équivalent)
+			grapheInverse->GORAjouterSommet(numSommet); // création de l'équivalent dans "grapheInverse"
 		}
 
 		// 3) copier l'inverse des arcs (inverser les numDep et numArr)
 		for (A* arc : vArcs) {
-			unsigned int numDep = arc->LireSommetDep(); 
-			unsigned int numArr = arc->LireSommetArr();
-			grapheInverse->AjouterArc(numArr, numDep);
+			unsigned int numDep = arc->ARCLireSommetDep(); 
+			unsigned int numArr = arc->ARCLireSommetArr();
+			grapheInverse->GORAjouterArc(numArr, numDep);
 		}
 
 		return grapheInverse;
 	}
 
 
-	void AfficherGraphe(); // liée à la classe CAffichage
+	void GORAfficherGraphe(); // liée à la classe CAffichage
 	
 
 	// graphe => string (pour faire par la suite => fichier.txt)
 	// faire un string respectant les conventions de fichier txt 
-	string GenererContenuTXT() {
+	string GORGenererContenuTXT() {
 
 	}
 
@@ -202,28 +217,28 @@ public:
 	// vector<A*>vArcs;
 
 	// setters
-	void setvSommet(S* s) {
+	void GORsetvSommet(S* s) {
 		vSommets.push_back(s);
 	}
 
-	void setvArc(A* a) {
+	void GORsetvArc(A* a) {
 		vSommets.push_back(a);
 	}
 	
 
 	//toString 
-	string toString() {
+	string GORtoString() {
 		string s = "";
 		// s += "Je suis un graphe oriente!";
 		s += "Graphe(\n";
 		s += "-- Sommets --\n";
 		for (S* sommet : vSommets) {
-			s += sommet->toString();
+			s += sommet->SOMtoString();
 		}
 
 		s += "-- arcs --\n";
 		for (A* arc : vArcs) {
-			s += "    "+arc->toString() + "\n";
+			s += "    "+arc->ARCtoString() + "\n";
 		}
 		s += "\n)";
 		return s;
@@ -234,19 +249,19 @@ public:
 	
 private:
 	// méthodes utiles en interne (non accessible de l'exterieur)
-	S* TrouverSommet(unsigned int uiNumero) {
+	S* GORTrouverSommet(unsigned int uiNumero) {
 		for (S* sommet : vSommets) { // parcourir tout les sommets de la liste "vSommets" du graphe
-			if (sommet->getNumero() == uiNumero) { // si on trouve un sommet ayant ce numéro
+			if (sommet->SOMgetNumero() == uiNumero) { // si on trouve un sommet ayant ce numéro
 				return sommet; // on renvoie le pointeur du sommet
 			}
 		}
 		return nullptr; // sinon on renvoie "pointeur vide"
 	}
 
-	A* TrouverArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
+	A* GORTrouverArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		for (A* arc : vArcs) {
 			// si on trouve l'arc avec les sommets de départ et arrivé corréspondents:
-			if (arc->LireSommetDep() == uiNumeroDepart && arc->LireSommetArr() == uiNumeroArrive) {
+			if (arc->ARCLireSommetDep() == uiNumeroDepart && arc->ARCLireSommetArr() == uiNumeroArrive) {
 				return arc; // on renvoie le pointeur de l'arc
 			}
 		}
@@ -257,4 +272,4 @@ private:
 
 }; // fin de la classe
 
-#endif // !CGrapheOriente_H
+#endif // !PGrapheOriente_H

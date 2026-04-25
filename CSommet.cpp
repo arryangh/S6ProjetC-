@@ -24,33 +24,33 @@ SOLUTION:
 
 CSommet::~CSommet() {
 	// supprimer les arcs partants (on les possède)
-	vector<CArc*> copieD = vArcDep;
+	vector<CArc*> copieD = vSOMArcDep;
 	for (CArc* arc : copieD) {
 		delete arc;
 	}
 
 	// supprimer les arcs arrivants (possédés par d'autres sommets, 
 	// mais ils pointent vers nous donc il faut les supprimer aussi)
-	vector<CArc*> copieA = vArcArr;
+	vector<CArc*> copieA = vSOMArcArr;
 	for (CArc* arc : copieA) {
 		delete arc;
 	}
 }
 
 // toString
-string CSommet::toString() {
+string CSommet::SOMtoString() {
 	string s = "";
 	s += "    Sommet(" + to_string(uiNumero) + ")\n";
 
 	s += "        Arcs partants: ";
-	for (CArc* arc : vArcDep) {
-		s += arc->toString() + " ";
+	for (CArc* arc : vSOMArcDep) {
+		s += arc->ARCtoString() + " ";
 	}
 	s += "\n";
 
 	s += "        Arcs arrivants: ";
-	for (CArc* arc : vArcArr) {
-		s += arc->toString() + " ";
+	for (CArc* arc : vSOMArcArr) {
+		s += arc->ARCtoString() + " ";
 	}
 	s += "\n";
 
