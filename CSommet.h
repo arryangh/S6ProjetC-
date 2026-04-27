@@ -19,25 +19,24 @@
 #include "CArc.h"
 #include <string>
 
-
 using namespace std;
 
 class CSommet {
-// attributs
+// ATTRIBUTS :
 protected:
 	unsigned int uiSOMNumero;
 	vector<CArc*>vSOMArcDep; //vecteur contenant les pointeur de type CArc* (les arcs sortant)
 	vector<CArc*>vSOMArcArr; //vecteur contenant les pointeur de type CArc* (les arcs entrant)
 
 public:
-	// CONSTRUCTEURS ET DESTRUCTEURS
+// CONSTRUCTEURS ET DESTRUCTEURS
 	CSommet(unsigned int numero) {
 		uiSOMNumero = numero;
 	}
 
 	~CSommet();
 
-	// METHODES
+// METHODES
 	/*********************************************************************************
 	* SOMretirerArcD
 	* ********************************************************************************
@@ -64,7 +63,6 @@ public:
 		vSOMArcArr.erase(remove(vSOMArcArr.begin(), vSOMArcArr.end(), pArc), vSOMArcArr.end());
 	}
 
-
 	/*********************************************************************************
 	* SOMtoString
 	* ********************************************************************************
@@ -77,13 +75,11 @@ public:
 	*********************************************************************************/
 	string SOMtoString();
 
-	// accesseurs 
-	// getters
+// ACCESSEURS
 	unsigned int SOMgetNumero() {
 		return uiSOMNumero;
 	}
 
-	// getters (constate pour assurer de pas modifier CArc)
 	const vector<CArc*>& SOMgetvArcDep() const {
 		return vSOMArcDep;
 	}
@@ -92,8 +88,6 @@ public:
 		return vSOMArcArr;
 	}
 	
-
-	// setters
 	void SOMsetvArcDep(CArc* a) {
 		vSOMArcDep.push_back(a);
 
@@ -102,12 +96,6 @@ public:
 	void SOMsetvArcArr(CArc* a) {
 		vSOMArcArr.push_back(a);
 	}
-
-	
-
-
-	
-
 };
 
 #endif // !CSommet_H

@@ -6,9 +6,9 @@
 /*********************************************************************************
 * PATRON : PGrapheOriente
 * ********************************************************************************
-* ROLE: Chaque instance de cette classe représante un sommet dans un graphe. Chaque
-*	    Sommet dispose au moins un vector de arc de départ et un vector d'arc d'arrivé.
-*       Cette classe est conçue pour être surchargée par d'autres classes filles.
+* ROLE: Ce patron de classe permet d'instancier des graphes en prenant en paramètre des pointeurs de Sommet (S) et 
+* des pointeurs d'Arcs (A) génériques. Ainsi, l'utilisateur pourra faire un graphe en utilisant ses propres classes 
+* héritées des classes CSommet et CArc.
 * ********************************************************************************
 * VERSION: 1.0
 * AUTEUR: Anaëlle BENOIST & Aryan GHALEHNOEE
