@@ -9,11 +9,11 @@ using namespace std;
 
 class CGestionnaireFichier {
 private:
-    int nbSommetsAttendu; // le nombre de sommet déclaré au début du fichier 
-    int nbArcsAttendu; // le nombre d'arc déclaré au début du fichier
-    vector<int> sommets; // les numéros de sommets trouvé dans le fichier (dans la section Sommets=[...])
-    vector<pair<int, int>> arcs; // les pairs de numéros (Debut, Fin) trouvé dans la section Arcs=[...]
-    PGrapheOriente<CSommet, CArc>* G;
+    int iGSFnbSommetsAttendu; // le nombre de sommet déclaré au début du fichier 
+    int iGSFnbArcsAttendu; // le nombre d'arc déclaré au début du fichier
+    vector<int> vGSFsommets; // les numéros de sommets trouvé dans le fichier (dans la section Sommets=[...])
+    vector<pair<int, int>> vGSFarcs; // les pairs de numéros (Debut, Fin) trouvé dans la section Arcs=[...]
+    PGrapheOriente<CSommet, CArc>* pGORGSFGraphe;
 
 public:
 	// const & dest

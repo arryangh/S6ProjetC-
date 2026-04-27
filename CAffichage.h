@@ -15,7 +15,7 @@ public:
 
 
 	// méthodes 
-	void AfficherGraphe();
+	void AFFAfficherGraphe();
 
 	/*
 	* void AfficherGraphe(CGrapheOriente<S, A>* G);

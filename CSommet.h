@@ -25,14 +25,14 @@ using namespace std;
 class CSommet {
 // attributs
 protected:
-	unsigned int uiNumero;
+	unsigned int uiSOMNumero;
 	vector<CArc*>vSOMArcDep; //vecteur contenant les pointeur de type CArc* (les arcs sortant)
 	vector<CArc*>vSOMArcArr; //vecteur contenant les pointeur de type CArc* (les arcs entrant)
 
 public:
 	// CONSTRUCTEURS ET DESTRUCTEURS
 	CSommet(unsigned int numero) {
-		uiNumero = numero;
+		uiSOMNumero = numero;
 	}
 
 	~CSommet();
@@ -80,7 +80,7 @@ public:
 	// accesseurs 
 	// getters
 	unsigned int SOMgetNumero() {
-		return uiNumero;
+		return uiSOMNumero;
 	}
 
 	// getters (constate pour assurer de pas modifier CArc)

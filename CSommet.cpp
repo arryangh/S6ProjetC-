@@ -40,7 +40,7 @@ CSommet::~CSommet() {
 // toString
 string CSommet::SOMtoString() {
 	string s = "";
-	s += "    Sommet(" + to_string(uiNumero) + ")\n";
+	s += "    Sommet(" + to_string(uiSOMNumero) + ")\n";
 
 	s += "        Arcs partants: ";
 	for (CArc* arc : vSOMArcDep) {

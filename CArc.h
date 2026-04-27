@@ -25,8 +25,8 @@ using namespace std;
 class CArc {
 // attributs
 protected:
-	CSommet* SMTSommetDep;
-	CSommet* SMTSommetArr;
+	CSommet* pSOMSommetDep;
+	CSommet* pSOMSommetArr;
 
 public:
 	// CONSTRUCTEURS ET DESTRUCTEURS

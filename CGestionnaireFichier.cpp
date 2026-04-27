@@ -1,9 +1,9 @@
 #include "CGestionnaireFichier.h"
 
 CGestionnaireFichier::CGestionnaireFichier() {
-    nbSommetsAttendu = 0; // le nombre de sommet déclaré au début du fichier, fixé à 0 au début
-    nbArcsAttendu = 0; // le nombre d'arc déclaré au début du fichier, fixé à 0 au début
-    G = nullptr; //penser à initialiser les pointeur
+    iGSFnbSommetsAttendu = 0; // le nombre de sommet déclaré au début du fichier, fixé à 0 au début
+    iGSFnbArcsAttendu = 0; // le nombre d'arc déclaré au début du fichier, fixé à 0 au début
+    pGORGSFGraphe = nullptr; //penser à initialiser les pointeur
 }
 
 void CGestionnaireFichier::GSFAfficherContenuFichier(const string& chemin) {
@@ -35,21 +35,21 @@ void CGestionnaireFichier::GSFCollectionDonneesFichierTXT(string sPath) {
             ligne.pop_back();
 
         if (ligne.find("NBSommets=") != string::npos) {
-            nbSommetsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
+            iGSFnbSommetsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
         }
         else if (ligne.find("NBArcs=") != string::npos) {
-            nbArcsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
+            iGSFnbArcsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
         }
         else if (ligne.find("Numero=") != string::npos) {
             // lignes de type: Numero=1 => stoi("1)
             int numero = stoi(ligne.substr(ligne.find("=") + 1));
-            sommets.push_back(numero);
+            vGSFsommets.push_back(numero);
         }
         else if (ligne.find("Debut=") != string::npos) {
             // lignes de type: "Debut=1, Fin=2" => stoi("1, Fin=2) = stoi("1") car stoi s'arrête dès qu'il y a pas un numéro
             int numDeb = stoi(ligne.substr(ligne.find("Debut=") + 6));
             int numFin = stoi(ligne.substr(ligne.find("Fin=") + 4));
-            arcs.push_back(make_pair(numDeb, numFin));
+            vGSFarcs.push_back(make_pair(numDeb, numFin));
         }
     }
     cout << "1) les donnees du fichier on ete collecte avec succes" << endl;
@@ -58,14 +58,14 @@ void CGestionnaireFichier::GSFCollectionDonneesFichierTXT(string sPath) {
 //2
 bool CGestionnaireFichier::GSFVerificationCoheranceDesDonnees() {
     // vérifications
-    if ((int)sommets.size() != nbSommetsAttendu) {
-        cerr << "Erreur : nombre de sommets détectés (" << sommets.size()
-            << ") ne correspond pas à celui déclaré (" << nbSommetsAttendu << ")." << endl;
+    if ((int)vGSFsommets.size() != iGSFnbSommetsAttendu) {
+        cerr << "Erreur : nombre de sommets détectés (" << vGSFsommets.size()
+            << ") ne correspond pas à celui déclaré (" << iGSFnbSommetsAttendu << ")." << endl;
         return false;
     }
-    if ((int)arcs.size() != nbArcsAttendu) {
-        cerr << "Erreur : nombre d'arcs détectés (" << arcs.size()
-            << ") ne correspond pas à celui déclaré (" << nbArcsAttendu << ")." << endl;
+    if ((int)vGSFarcs.size() != iGSFnbArcsAttendu) {
+        cerr << "Erreur : nombre d'arcs détectés (" << vGSFarcs.size()
+            << ") ne correspond pas à celui déclaré (" << iGSFnbArcsAttendu << ")." << endl;
         return false;
     }
 
@@ -78,16 +78,16 @@ bool CGestionnaireFichier::GSFVerificationCoheranceDesDonnees() {
 PGrapheOriente<CSommet, CArc>* CGestionnaireFichier::GSFInstancierLeGraphe() {
     PGrapheOriente<CSommet, CArc>* graphe = new PGrapheOriente<CSommet, CArc>();
 
-    for (int numero : sommets) {
+    for (int numero : vGSFsommets) {
         graphe->GORAjouterSommet(numero);
     }
-    for (pair<int, int> arc : arcs) {
+    for (pair<int, int> arc : vGSFarcs) {
         graphe->GORAjouterArc(arc.first, arc.second);
     }
 
     cout << "3) graphe genere avec succes" << endl;
 
-    CGestionnaireFichier::G = graphe; // est ce que c'est vraiment utile de l'avoir en attribut? 
+    CGestionnaireFichier::pGORGSFGraphe = graphe; // est ce que c'est vraiment utile de l'avoir en attribut? 
     // bien faire attention au fait que c'est un pointeur vers le même graphe en mémoire, peut être qu'il fallait 
     // gérer ça avec "const" avec une histoire de copie etc, à voir
 

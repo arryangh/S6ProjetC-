@@ -25,8 +25,8 @@
 template <class S, class A>
 class PGrapheOriente {
 protected:
-	vector<S*>vSommets; // le vecteur contenant les pointeurs de type générique S (sommet)
-	vector<A*>vArcs; // le vecteur contenant les pointeurs de type générique A (Arc)
+	vector<S*>vGORSommets; // le vecteur contenant les pointeurs de type générique S (sommet)
+	vector<A*>vGORArcs; // le vecteur contenant les pointeurs de type générique A (Arc)
 
 
 
@@ -50,10 +50,10 @@ public:
 		S* s = new S(uiNumero);
 
 		// ajouter le pointeur du sommet générique à "vector<S*>vSommets"
-		vSommets.push_back(s);
+		vGORSommets.push_back(s);
 	}
 
-	void GORAjouterArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
+	virtual void GORAjouterArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		// 1) trouver sommetDepart (il faut le pointeur)
 		S* sommetDep = GORTrouverSommet(uiNumeroDepart);
 
@@ -64,7 +64,7 @@ public:
 		// 3) créer l'arc avec ces sommets de départs arrivés
 		if (sommetDep != nullptr && sommetArr != nullptr) { // si les sommets sont trouvé
 			A* nouvelArc = new A(sommetDep, sommetArr);
-			vArcs.push_back(nouvelArc);
+			vGORArcs.push_back(nouvelArc);
 		}
 		else {
 			if (sommetDep == nullptr && sommetArr == nullptr) {
@@ -93,14 +93,14 @@ public:
 		if (sommet != nullptr) { 
 			// 2) retirer les arcs A* du sommets qu'on veut supprimer de la liste "vArcs" du graphe
 			for (A* arc : sommet->SOMgetvArcDep()) { // retirer "les arcs de départ du sommet" des arcs du graphe
-				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+				vGORArcs.erase(remove(vGORArcs.begin(), vGORArcs.end(), arc), vGORArcs.end());
 			}
 			for (A* arc : sommet->SOMgetvArcArr()) { // retirer "les arcs d'arrivé du sommet" des arcs du graphe
-				vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+				vGORArcs.erase(remove(vGORArcs.begin(), vGORArcs.end(), arc), vGORArcs.end());
 			}
 
 			// 3) retirer le sommet S* qu'on veut supprimer de la liste "vSommets" du graphe
-			vSommets.erase(remove(vSommets.begin(), vSommets.end(), sommet), vSommets.end());
+			vGORSommets.erase(remove(vGORSommets.begin(), vGORSommets.end(), sommet), vGORSommets.end());
 
 			// 4) le "delete"
 			delete sommet; // appelle le déstructeur de CSommet (supprime le sommet proprement en supprimant les arcs liées etc)
@@ -111,14 +111,14 @@ public:
 
 	}
 
-	void GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
+	virtual void GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
 		// 1) trouver l'arc A* qu'on veut supprimer 
 		A* arc = GORTrouverArc(uiNumeroDepart, uiNumeroArrive);
 
 		// si l'arc a été trouvé 
 		if (arc != nullptr) {
 			// 2) retirer l'arc A* de de la liste "vArcs" du graphe
-			vArcs.erase(remove(vArcs.begin(), vArcs.end(), arc), vArcs.end());
+			vGORArcs.erase(remove(vGORArcs.begin(), vGORArcs.end(), arc), vGORArcs.end());
 
 			// 3) supprimer l'arc 
 			delete arc; // appèle le déstructeur qui enlève l'arc des sommets en question 
@@ -140,7 +140,7 @@ public:
 	/*
 	* remarque: si un utilisateur veut vraiment modifier un arc avec des données en plus, il peut appeler directement des setters sur l'arc en question.
 	*/
-	void GORModifierArc(unsigned int oldND, unsigned int oldNA, unsigned int newND, unsigned int newNA) {
+	virtual void GORModifierArc(unsigned int oldND, unsigned int oldNA, unsigned int newND, unsigned int newNA) {
 		// 1) vérifier que l'arc à modifier existe
 		A* arc = GORTrouverArc(oldND, oldNA);
 		if (arc == nullptr) {
@@ -180,13 +180,13 @@ public:
 		PGrapheOriente<S, A>* grapheInverse = new PGrapheOriente<S, A>();
 
 		// 2) copie à l'identique de tout les sommets générique S* 
-		for (S* sommet : vSommets) {
+		for (S* sommet : vGORSommets) {
 			unsigned int numSommet = sommet->SOMgetNumero(); // le numéro du sommet à recopier (créer l'équivalent)
 			grapheInverse->GORAjouterSommet(numSommet); // création de l'équivalent dans "grapheInverse"
 		}
 
 		// 3) copier l'inverse des arcs (inverser les numDep et numArr)
-		for (A* arc : vArcs) {
+		for (A* arc : vGORArcs) {
 			unsigned int numDep = arc->ARCLireSommetDep(); 
 			unsigned int numArr = arc->ARCLireSommetArr();
 			grapheInverse->GORAjouterArc(numArr, numDep);
@@ -218,11 +218,11 @@ public:
 
 	// setters
 	void GORsetvSommet(S* s) {
-		vSommets.push_back(s);
+		vGORSommets.push_back(s);
 	}
 
 	void GORsetvArc(A* a) {
-		vSommets.push_back(a);
+		vGORSommets.push_back(a);
 	}
 	
 
@@ -232,12 +232,12 @@ public:
 		// s += "Je suis un graphe oriente!";
 		s += "Graphe(\n";
 		s += "-- Sommets --\n";
-		for (S* sommet : vSommets) {
+		for (S* sommet : vGORSommets) {
 			s += sommet->SOMtoString();
 		}
 
 		s += "-- arcs --\n";
-		for (A* arc : vArcs) {
+		for (A* arc : vGORArcs) {
 			s += "    "+arc->ARCtoString() + "\n";
 		}
 		s += "\n)";
@@ -250,7 +250,7 @@ public:
 private:
 	// méthodes utiles en interne (non accessible de l'exterieur)
 	S* GORTrouverSommet(unsigned int uiNumero) {
-		for (S* sommet : vSommets) { // parcourir tout les sommets de la liste "vSommets" du graphe
+		for (S* sommet : vGORSommets) { // parcourir tout les sommets de la liste "vSommets" du graphe
 			if (sommet->SOMgetNumero() == uiNumero) { // si on trouve un sommet ayant ce numéro
 				return sommet; // on renvoie le pointeur du sommet
 			}
@@ -259,7 +259,7 @@ private:
 	}
 
 	A* GORTrouverArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
-		for (A* arc : vArcs) {
+		for (A* arc : vGORArcs) {
 			// si on trouve l'arc avec les sommets de départ et arrivé corréspondents:
 			if (arc->ARCLireSommetDep() == uiNumeroDepart && arc->ARCLireSommetArr() == uiNumeroArrive) {
 				return arc; // on renvoie le pointeur de l'arc
