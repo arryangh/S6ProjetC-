@@ -3,8 +3,8 @@
 
 
 #include <vector>
-#include "CSommet.h"
-#include "CArc.h"
+#include "PSommet.h"
+#include "PArc.h"
 #include "PGrapheOriente.h"
 
 

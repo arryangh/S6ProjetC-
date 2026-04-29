@@ -8,7 +8,7 @@
 * ********************************************************************************
 * ROLE: Ce patron de classe permet d'instancier des graphes en prenant en paramètre des pointeurs de Sommet (S) et 
 * des pointeurs d'Arcs (A) génériques. Ainsi, l'utilisateur pourra faire un graphe en utilisant ses propres classes 
-* héritées des classes CSommet et CArc.
+* héritées des classes PSommet et PArc.
 * ********************************************************************************
 * VERSION: 1.0
 * AUTEUR: Anaëlle BENOIST & Aryan GHALEHNOEE
@@ -17,8 +17,8 @@
 * INCLUSIONS EXTERNES:
 */
 #include <vector>
-#include "CSommet.h"
-#include "CArc.h"
+#include "PSommet.h"
+#include "PArc.h"
 
 
 // patron de classe PGrapheOriente
@@ -44,7 +44,7 @@ public:
 
 	// méthodes 
 	void GORAjouterSommet(unsigned int uiNumero) {
-		// CSommet* s1 = new CSommet(1);
+		// PSommet* s1 = new PSommet(1);
 
 		// créer le sommet générique "S" (en utilisant un pointeur)
 		S* s = new S(uiNumero);
@@ -103,7 +103,7 @@ public:
 			vGORSommets.erase(remove(vGORSommets.begin(), vGORSommets.end(), sommet), vGORSommets.end());
 
 			// 4) le "delete"
-			delete sommet; // appelle le déstructeur de CSommet (supprime le sommet proprement en supprimant les arcs liées etc)
+			delete sommet; // appelle le déstructeur de PSommet (supprime le sommet proprement en supprimant les arcs liées etc)
 		}
 		else {
 			cout << "PGrapheOriente.h->SupprimerSommet(): sommet " + to_string(uiNumero) + " non trouvé." << endl;

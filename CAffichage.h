@@ -2,7 +2,7 @@
 #define CAffichage_H
 
 #include <vector>
-#include "CArc.h"
+#include "PArc.h"
 
 using namespace std;
 

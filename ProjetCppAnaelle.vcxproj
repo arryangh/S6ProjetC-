@@ -127,19 +127,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CArc.cpp" />
-    <ClCompile Include="CGestionnaireFichier.cpp" />
-    <ClCompile Include="CGestionnaireFichier.h" />
-    <ClCompile Include="CGrapheNonOriente.h" />
-    <ClCompile Include="CSommet.cpp" />
-    <ClCompile Include="CSommet.h" />
+    <ClCompile Include="PGestionnaireFichier.h" />
+    <ClCompile Include="PSommet.h" />
     <ClCompile Include="MaClasse.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CAffichage.h" />
-    <ClInclude Include="CArc.h" />
-    <ClInclude Include="CGrapheOriente.h" />
+    <ClInclude Include="PArc.h" />
+    <ClInclude Include="PGrapheNonOriente.h" />
+    <ClInclude Include="PGrapheOriente.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

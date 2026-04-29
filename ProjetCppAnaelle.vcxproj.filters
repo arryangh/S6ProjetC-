@@ -18,36 +18,27 @@
     <ClCompile Include="MaClasse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CArc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CSommet.h">
+    <ClCompile Include="PSommet.h">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="CGestionnaireFichier.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CGrapheNonOriente.h">
+    <ClCompile Include="PGestionnaireFichier.h">
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CSommet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CGestionnaireFichier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CArc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CGrapheOriente.h">
+    <ClInclude Include="PArc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CAffichage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PGrapheNonOriente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PGrapheOriente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
