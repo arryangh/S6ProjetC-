@@ -142,7 +142,6 @@ PSommet<A>::~PSommet() {
 	}
 }
 
-// toString
 template <class A>
 string PSommet<A>::SOMtoString() {
 	string s = "";
@@ -163,10 +162,4 @@ string PSommet<A>::SOMtoString() {
 	return s;
 }
 
-
-
-
 #endif // !PSommet_H
-
-
-

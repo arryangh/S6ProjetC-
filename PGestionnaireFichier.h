@@ -7,9 +7,9 @@
 
 using namespace std;
 
-
 template <class S, class A>
 class PGestionnaireFichier {
+// ATTRIBUTS :
 private:
     int iGSFnbSommetsAttendu; // le nombre de sommet déclaré au début du fichier 
     int iGSFnbArcsAttendu; // le nombre d'arc déclaré au début du fichier
@@ -18,40 +18,27 @@ private:
     PGrapheOriente<S, A>* pGORGSFGraphe;
 
 public:
-	// const & dest
+// CONSTRUCTEURS ET DESTRUCTEURS
     PGestionnaireFichier();
-
     ~PGestionnaireFichier() {};
 
-    // méthodes 
-
-
+// METHODES
     // juste pour afficher le contenu du fichier text brut (pour visualiser)
     void GSFAfficherContenuFichier(const string& chemin);
-
 
 	/*
 	* Prend une chaine de caractère contenant la représentation d'une graphe, analyse 
 	* ce contenu et crée le graphe équivalent sous forme d'objet PGrapheOriente.
 	*/
-
-
     // 1)
     void GSFCollectionDonneesFichierTXT(string sPath);
-
-
     // 2)
     bool GSFVerificationCoheranceDesDonnees();
-
-
     // 3)
     PGrapheOriente<S, A>* GSFInstancierLeGraphe();
 
     // apelle des méthodes 1,2,3
     PGrapheOriente<S, A>* GSFGenererGrapheDepuisFichier(string sPath);
-
-	// accesseurs 
-
 };
 
 template <class S, class A>
@@ -153,7 +140,6 @@ PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFInstancierLeGraphe() {
     return graphe;
 }
 
-
 // apelle des méthodes 1,2,3
 template <class S, class A>
 PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFGenererGrapheDepuisFichier(string sPath) {
@@ -165,8 +151,4 @@ PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFGenererGrapheDepuisFichier(s
     return nullptr; // si 2 renvoie false
 }
 
-
 #endif // !1
-
-
-

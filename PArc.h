@@ -25,20 +25,17 @@ template <class A> class PSommet; //Déclaration de PArc pour gérer pour la dé
 
 template <class S>
 class PArc {
-// attributs
+// ATTRIBUTS :
 protected:
 	S* pSOMSommetDep;
 	S* pSOMSommetArr;
 
 public:
-	// CONSTRUCTEURS ET DESTRUCTEURS
+// CONSTRUCTEURS ET DESTRUCTEURS
 	PArc(S* s1, S* s2);		
 	~PArc();
 
-	// METHODES 
-
-
-
+// METHODES 
 	/*********************************************************************************
 	* SOMtoString
 	* ********************************************************************************
@@ -51,10 +48,14 @@ public:
 	*********************************************************************************/
 	string ARCtoString();
 
-	// accesseurs 
-	unsigned int ARCLireSommetDep();
-	unsigned int ARCLireSommetArr();
+// ACCESSEURS
+	unsigned int ARCLireSommetDep() {
+		return pSOMSommetDep->SOMgetNumero(); // renovyer le numéro du sommet de départ
+	}
 
+	unsigned int ARCLireSommetArr() {
+		return pSOMSommetArr->SOMgetNumero(); // renovyer le numéro du sommet de d'arrivé
+	}
 }; 
 
 template <class S>
@@ -82,17 +83,6 @@ string PArc<S>::ARCtoString() {
 	s += ")";
 	return s;
 }
-
-template <class S>
-unsigned int PArc<S>::ARCLireSommetDep() {
-	return pSOMSommetDep->SOMgetNumero(); // renovyer le numéro du sommet de départ
-}
-
-template <class S>
-unsigned int PArc<S>::ARCLireSommetArr() {
-	return pSOMSommetArr->SOMgetNumero(); // renovyer le numéro du sommet de d'arrivé
-}
-
 
 #endif // !CArc_H
 

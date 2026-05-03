@@ -9,7 +9,6 @@
 
 using namespace std;
 
-
 // forward declarations mutuelles
 class MonSommet;
 class MonArc;
@@ -303,7 +302,6 @@ void NosTestes() {
 	
 }
 
-
 void fonctionPrincipaleSujet() {
 	afficherMot("==================================  TEST DEMANDE DANS LE SUJET ===================================");
 	// 1) Pour un nom de fichier passé en paramètre, lire le fichier et créer le graphe associé
@@ -321,8 +319,6 @@ void fonctionPrincipaleSujet() {
 	afficherMot("\nl'inverse: ");
 	cout << G2->GORtoString() << endl;
 }
-
-
 
 int main() {
 	//NosTestes();
