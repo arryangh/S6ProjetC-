@@ -2,10 +2,11 @@
 #define PSommet_H
 
 /*********************************************************************************
-* CLASSE : PSommet
+* PATRON DE CLASSE : PSommet
 * ********************************************************************************
 * ROLE: Chaque instance de cette classe représante un sommet dans un graphe. Chaque 
-*	    Sommet dispose au moins un vector de arc de départ et un vector d'arc d'arrivé.
+*	    Sommet dispose au moins un vector de pointeur d'arc de départ et un vector 
+		de pointeur d'arc d'arrivé.
 *       Cette classe est conçue pour être surchargée par d'autres classes filles.
 * ********************************************************************************
 * VERSION: 1.0
@@ -21,18 +22,17 @@
 
 using namespace std;
 
-template <class S> class PArc; //Déclaration de PArc pour gérer pour la dépendance circulaire
-
+template <class S> class PArc; 
 template <class A>
 class PSommet {
 // ATTRIBUTS :
 protected:
 	unsigned int uiSOMNumero;
-	vector<A*>vSOMArcDep; //vecteur contenant les pointeur de type A* (les arcs sortant)
-	vector<A*>vSOMArcArr; //vecteur contenant les pointeur de type A* (les arcs entrant)
+	vector<A*>vSOMArcDep; 
+	vector<A*>vSOMArcArr; 
 
-public:
 // CONSTRUCTEURS ET DESTRUCTEURS
+public:
 	PSommet(unsigned int numero) {
 		uiSOMNumero = numero;
 	}
@@ -85,57 +85,65 @@ public:
 		return uiSOMNumero;
 	}
 
+	/*********************************************************************************
+	* SOMgetvArcDep
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : référence constante vers le vector des arcs de départ
+	* Entraîne : permet d'accéder aux arcs sortants du sommet sans les modifier
+	*********************************************************************************/
 	const vector<A*>& SOMgetvArcDep() const {
 		return vSOMArcDep;
 	}
 
+	/*********************************************************************************
+	* SOMgetvArcArr
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : référence constante vers le vector des arcs d'arrivée
+	* Entraîne : permet d'accéder aux arcs entrants du sommet sans les modifier
+	*********************************************************************************/
 	const vector<A*>& SOMgetvArcArr() const {
 		return vSOMArcArr;
 	}
 	
+	/*********************************************************************************
+	* SOMsetvArcDep
+	* ********************************************************************************
+	* Entrée : a, pointeur de type A représentant un arc à ajouter
+	* Nécessite : Rien
+	* Sortie : Rien
+	* Entraîne : ajoute un arc au vector des arcs de départ du sommet
+	*            effectue un cast de T* vers A*
+	*********************************************************************************/
 	template <class T>
 	void SOMsetvArcDep(T* a) {
 		vSOMArcDep.push_back((A*)a);
-
 	}
 
+	/*********************************************************************************
+	* SOMsetvArcArr
+	* ********************************************************************************
+	* Entrée : a, pointeur de type A représentant un arc à ajouter
+	* Nécessite : Rien
+	* Sortie : Rien
+	* Entraîne : ajoute un arc au vector des arcs d'arrivée du sommet
+	*            effectue un cast de T* vers A*
+	*********************************************************************************/
 	template <class T>
 	void SOMsetvArcArr(T* a) {
 		vSOMArcArr.push_back((A*)a);
 	}
 };
 
-/*
-* PSommet::~PSommet() {
-	for (A* CArcDep : vArcDep) {
-		delete CArcDep;
-	}
-	for (A* CArcArr : vArcArr) {
-		delete CArcArr;
-	}
-}
-ATTENTION: dans la version qui se trouve juste en haut, le déstructeur du sommet supprime les arcs partants et
-arrivants.
-	- le problème c'est que chaque arc se trouve dans 2 sommets.
-	- quand on arrive au 2ième sommets, on essayera de resupprimer cet arc, mais il n'existe plus
-	- de plus, quand le premier sommet supprime l'arc, le deuxième pointe vers le vide
-
-SOLUTION:
-	- dans le déstructeur de PSommet, on supprime que les arcs de départ
-	- c'est le déstructeur de CArc qui retire l'arc du sommet d'arrivé (méthode
-
-*/
-
 template <class A>
 PSommet<A>::~PSommet() {
-	// supprimer les arcs partants (on les possède)
 	vector<A*> copieD = vSOMArcDep;
 	for (A* arc : copieD) {
 		delete arc;
 	}
-
-	// supprimer les arcs arrivants (possédés par d'autres sommets, 
-	// mais ils pointent vers nous donc il faut les supprimer aussi)
 	vector<A*> copieA = vSOMArcArr;
 	for (A* arc : copieA) {
 		delete arc;

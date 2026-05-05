@@ -2,13 +2,13 @@
 #define CArc_H
 
 /*********************************************************************************
-* CLASSE : CArc
+* PATRON DE CLASSE : PArc
 * ********************************************************************************
-* ROLE: Chaque instance de cette classe représante un arc dans un graphe. Chaque
+* ROLE: Chaque instance de cette classe représente un arc dans un graphe. Chaque
 *	    arc dispose au moins pointeur vers un sommet de départ et pointeur vers un
 *       sommet d'arrivé.
 *       Cette classe est conçue pour être surchargée par d'autres classes filles
-*       pour l'ajout d'attributs supplémentaires (distance, temps, poid, etc)
+*       pour l'ajout d'attributs supplémentaires (distance, temps, poid, etc...)
 * ********************************************************************************
 * VERSION: 1.0
 * AUTEUR: Anaëlle BENOIST & Aryan GHALEHNOEE
@@ -21,7 +21,7 @@
 
 using namespace std;
 
-template <class A> class PSommet; //Déclaration de PArc pour gérer pour la dépendance circulaire
+template <class A> class PSommet;
 
 template <class S>
 class PArc {
@@ -30,8 +30,8 @@ protected:
 	S* pSOMSommetDep;
 	S* pSOMSommetArr;
 
-public:
 // CONSTRUCTEURS ET DESTRUCTEURS
+public:
 	PArc(S* s1, S* s2);		
 	~PArc();
 
@@ -49,12 +49,30 @@ public:
 	string ARCtoString();
 
 // ACCESSEURS
+	/*********************************************************************************
+	* ARCLireSommetDep
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : Le numéro du sommet de départ
+	* Entraîne : permet d'accéder au numéro du sommet de départ via l'accesseur de 
+	*			 cet instance de PSommet.
+	*********************************************************************************/
 	unsigned int ARCLireSommetDep() {
-		return pSOMSommetDep->SOMgetNumero(); // renovyer le numéro du sommet de départ
+		return pSOMSommetDep->SOMgetNumero(); 
 	}
 
+	/*********************************************************************************
+	* ARCLireSommetArr
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : Le numéro du sommet de arrivée
+	* Entraîne : permet d'accéder au numéro du sommet de arrivée via l'accesseur de
+	*			 cet instance de PSommet.
+	*********************************************************************************/
 	unsigned int ARCLireSommetArr() {
-		return pSOMSommetArr->SOMgetNumero(); // renovyer le numéro du sommet de d'arrivé
+		return pSOMSommetArr->SOMgetNumero(); 
 	}
 }; 
 

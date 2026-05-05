@@ -1,6 +1,20 @@
 #ifndef PGestionnaireFichier_H
 #define PGestionnaireFichier_H
 
+/*********************************************************************************
+* PATRON DE CLASSE : PGestionnaireFichier
+* ********************************************************************************
+* ROLE: Ce patron de classe gère la lecture et l'interprétation de fichiers texte
+*       décrivant un graphe orienté. Il collecte les données du fichier, vérifie
+*       leur cohérence, puis instancie le graphe correspondant sous forme d'objet
+*       PGrapheOriente.
+* ********************************************************************************
+* VERSION: 1.0
+* AUTEUR: Anaëlle BENOIST & Aryan GHALEHNOEE
+* DATE:
+* ********************************************************************************
+* INCLUSIONS EXTERNES:
+*/
 #include <string>
 #include "PGrapheOriente.h"
 #include <fstream>
@@ -11,46 +25,95 @@ template <class S, class A>
 class PGestionnaireFichier {
 // ATTRIBUTS :
 private:
-    int iGSFnbSommetsAttendu; // le nombre de sommet déclaré au début du fichier 
-    int iGSFnbArcsAttendu; // le nombre d'arc déclaré au début du fichier
-    vector<int> vGSFsommets; // les numéros de sommets trouvé dans le fichier (dans la section Sommets=[...])
-    vector<pair<int, int>> vGSFarcs; // les pairs de numéros (Debut, Fin) trouvé dans la section Arcs=[...]
+    int iGSFnbSommetsAttendu;  
+    int iGSFnbArcsAttendu; 
+    vector<int> vGSFsommets;
+    vector<pair<int, int>> vGSFarcs; 
     PGrapheOriente<S, A>* pGORGSFGraphe;
 
-public:
 // CONSTRUCTEURS ET DESTRUCTEURS
+public:
     PGestionnaireFichier();
     ~PGestionnaireFichier() {};
 
 // METHODES
-    // juste pour afficher le contenu du fichier text brut (pour visualiser)
-    void GSFAfficherContenuFichier(const string& chemin);
+    /*********************************************************************************
+    * GSFAfficherContenuFichier
+    * ********************************************************************************
+    * Entrée : path, string, le chemin vers le fichier texte à afficher
+    * Nécessite : que le fichier existe et soit accessible en lecture
+    * Sortie : Rien
+    * Entraîne : ouvre le fichier et affiche son contenu brut ligne par ligne en console.
+    *            Si le fichier est introuvable, un message d'erreur est affiché et la
+    *            méthode s'arrête sans planter.
+    *********************************************************************************/
+    void GSFAfficherContenuFichier(const string& sPath);
 
-	/*
-	* Prend une chaine de caractère contenant la représentation d'une graphe, analyse 
-	* ce contenu et crée le graphe équivalent sous forme d'objet PGrapheOriente.
-	*/
-    // 1)
+    /*********************************************************************************
+    * GSFCollectionDonneesFichierTXT
+    * ********************************************************************************
+    * Entrée : sPath, string, le chemin vers le fichier texte à analyser
+    * Nécessite : que le fichier respecte le format attendu du projet
+    *             (NBSommets=, NBArcs=, Numero=, Debut=...Fin=...)
+    * Sortie : Rien
+    * Entraîne : lit le fichier ligne par ligne et remplit les attributs
+    *            iGSFnbSommetsAttendu, iGSFnbArcsAttendu, vGSFsommets et vGSFarcs
+    *            à partir des données trouvées.
+    *            Si le fichier est introuvable, un message d'erreur est affiché en console.
+    *********************************************************************************/
     void GSFCollectionDonneesFichierTXT(string sPath);
-    // 2)
+    
+    /*********************************************************************************
+    * GSFVerificationCoheranceDesDonnees
+    * ********************************************************************************
+    * Entrée : Rien
+    * Nécessite : que GSFCollectionDonneesFichierTXT ait été appelée au préalable
+    * Sortie : bool, true si les données sont cohérentes, false sinon
+    * Entraîne : vérifie que le nombre de sommets trouvés dans vGSFsommets correspond
+    *            à iGSFnbSommetsAttendu, et que le nombre d'arcs trouvés dans vGSFarcs
+    *            correspond à iGSFnbArcsAttendu.
+    *            Affiche un message d'erreur en console pour chaque incohérence détectée.
+    *********************************************************************************/
     bool GSFVerificationCoheranceDesDonnees();
-    // 3)
+    
+    /*********************************************************************************
+    * GSFInstancierLeGraphe
+    * ********************************************************************************
+    * Entrée : Rien
+    * Nécessite : que GSFCollectionDonneesFichierTXT et GSFVerificationCoheranceDesDonnees
+    *             aient été appelées avec succès au préalable
+    * Sortie : pointeur vers un nouveau PGrapheOriente<S, A>
+    * Entraîne : crée un nouveau graphe orienté, y ajoute tous les sommets de vGSFsommets
+    *            puis tous les arcs de vGSFarcs. Stocke également le pointeur du graphe
+    *            dans l'attribut pGORGSFGraphe.
+    *********************************************************************************/
     PGrapheOriente<S, A>* GSFInstancierLeGraphe();
 
-    // apelle des méthodes 1,2,3
+    /*********************************************************************************
+    * GSFGenererGrapheDepuisFichier
+    * ********************************************************************************
+    * Entrée : sPath, string, le chemin vers le fichier texte décrivant le graphe
+    * Nécessite : que le fichier existe et respecte le format attendu du projet
+    * Sortie : pointeur vers un nouveau PGrapheOriente<S, A>, ou nullptr en cas d'échec
+    * Entraîne : gère l'appel des trois étapes dans l'ordre :
+    *            1) GSFCollectionDonneesFichierTXT : lecture et collecte des données
+    *            2) GSFVerificationCoheranceDesDonnees : vérification de la cohérence
+    *            3) GSFInstancierLeGraphe : création et retour du graphe
+    *            Si la vérification échoue, retourne nullptr.
+    *********************************************************************************/
     PGrapheOriente<S, A>* GSFGenererGrapheDepuisFichier(string sPath);
 };
 
 template <class S, class A>
 PGestionnaireFichier<S,A>::PGestionnaireFichier() {
-    iGSFnbSommetsAttendu = 0; // le nombre de sommet déclaré au début du fichier, fixé à 0 au début
-    iGSFnbArcsAttendu = 0; // le nombre d'arc déclaré au début du fichier, fixé à 0 au début
-    pGORGSFGraphe = nullptr; //penser à initialiser les pointeur
+    iGSFnbSommetsAttendu = 0; 
+    iGSFnbArcsAttendu = 0;
+    pGORGSFGraphe = nullptr;
 }
 
 template <class S, class A>
-void PGestionnaireFichier<S,A>::GSFAfficherContenuFichier(const string& chemin) {
-    ifstream fichier(chemin);
+void PGestionnaireFichier<S,A>::GSFAfficherContenuFichier(const string& sPath) {
+    ifstream fichier(sPath);
 
     if (!fichier) {
         cerr << "Erreur : impossible d'ouvrir le fichier." << endl;
@@ -63,7 +126,6 @@ void PGestionnaireFichier<S,A>::GSFAfficherContenuFichier(const string& chemin) 
     }
 }
 
-//1
 template <class S, class A>
 void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
     ifstream fichier(sPath);
@@ -74,7 +136,6 @@ void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
 
     string ligne;
     while (getline(fichier, ligne)) {
-        // supprimer les espaces en fin de ligne (problème fréquent avec les fichiers texte)
         if (!ligne.empty() && ligne.back() == ' ')
             ligne.pop_back();
 
@@ -85,12 +146,10 @@ void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
             iGSFnbArcsAttendu = stoi(ligne.substr(ligne.find("=") + 1));
         }
         else if (ligne.find("Numero=") != string::npos) {
-            // lignes de type: Numero=1 => stoi("1)
             int numero = stoi(ligne.substr(ligne.find("=") + 1));
             vGSFsommets.push_back(numero);
         }
         else if (ligne.find("Debut=") != string::npos) {
-            // lignes de type: "Debut=1, Fin=2" => stoi("1, Fin=2) = stoi("1") car stoi s'arrête dès qu'il y a pas un numéro
             int numDeb = stoi(ligne.substr(ligne.find("Debut=") + 6));
             int numFin = stoi(ligne.substr(ligne.find("Fin=") + 4));
             vGSFarcs.push_back(make_pair(numDeb, numFin));
@@ -99,10 +158,8 @@ void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
     cout << "1) les donnees du fichier on ete collecte avec succes" << endl;
 }
 
-//2
 template <class S, class A>
 bool PGestionnaireFichier<S,A>::GSFVerificationCoheranceDesDonnees() {
-    // vérifications
     if ((int)vGSFsommets.size() != iGSFnbSommetsAttendu) {
         cerr << "Erreur : nombre de sommets détectés (" << vGSFsommets.size()
             << ") ne correspond pas à celui déclaré (" << iGSFnbSommetsAttendu << ")." << endl;
@@ -113,13 +170,10 @@ bool PGestionnaireFichier<S,A>::GSFVerificationCoheranceDesDonnees() {
             << ") ne correspond pas à celui déclaré (" << iGSFnbArcsAttendu << ")." << endl;
         return false;
     }
-
     cout << "2) la coherance des donnees verifie avec succes" << endl;
-
     return true;
 }
 
-//3
 template <class S, class A>
 PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFInstancierLeGraphe() {
     PGrapheOriente<S, A>* graphe = new PGrapheOriente<S, A>();
@@ -130,25 +184,21 @@ PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFInstancierLeGraphe() {
     for (pair<int, int> arc : vGSFarcs) {
         graphe->GORAjouterArc(arc.first, arc.second);
     }
-
     cout << "3) graphe genere avec succes" << endl;
 
-    PGestionnaireFichier<S,A>::pGORGSFGraphe = graphe; // est ce que c'est vraiment utile de l'avoir en attribut? 
-    // bien faire attention au fait que c'est un pointeur vers le même graphe en mémoire, peut être qu'il fallait 
-    // gérer ça avec "const" avec une histoire de copie etc, à voir
+    PGestionnaireFichier<S,A>::pGORGSFGraphe = graphe; 
 
     return graphe;
 }
 
-// apelle des méthodes 1,2,3
 template <class S, class A>
 PGrapheOriente<S, A>* PGestionnaireFichier<S,A>::GSFGenererGrapheDepuisFichier(string sPath) {
     cout << "lecture de fichier et generation de graphe..." << endl;
-    GSFCollectionDonneesFichierTXT(sPath); // 1)
-    if (GSFVerificationCoheranceDesDonnees()) { // 2)
-        return GSFInstancierLeGraphe(); //3)
+    GSFCollectionDonneesFichierTXT(sPath); 
+    if (GSFVerificationCoheranceDesDonnees()) { 
+        return GSFInstancierLeGraphe(); 
     }
-    return nullptr; // si 2 renvoie false
+    return nullptr;
 }
 
-#endif // !1
+#endif // !PGestionnaireFichier_H

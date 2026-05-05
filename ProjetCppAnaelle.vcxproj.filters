@@ -29,9 +29,6 @@
     <ClInclude Include="PArc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CAffichage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PGrapheNonOriente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
