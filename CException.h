@@ -33,14 +33,39 @@ private:
 
 // CONSTRUCTEURS
 public:
+    /*********************************************************************************
+    * CException
+    * ********************************************************************************
+    * Entrée : uiValeur, unsigned int, identifiant du type d'erreur
+    *          sMessage, string, le message qui décrit la cause de l'exception
+    * Nécessite : Rien
+    * Sortie : Rien
+    * Entraîne : initialise les attributs uiEXCvaleur et sEXCmessage
+    *********************************************************************************/
     CException(unsigned int uiValeur, const string& sMessage)
         : uiEXCvaleur(uiValeur), sEXCmessage(sMessage) {}
 
 // ACCESSEURS
+    /*********************************************************************************
+    * EXClireValeur
+    * ********************************************************************************
+    * Entrée : Rien
+    * Nécessite : Rien
+    * Sortie : unsigned int, l'identifiant de l'exception
+    * Entraîne : retourne la valeur qui identifie le type d'erreur
+    *********************************************************************************/
     unsigned int EXClireValeur() const {
         return uiEXCvaleur;
     }
 
+    /*********************************************************************************
+    * EXClireMessage
+    * ********************************************************************************
+    * Entrée : Rien
+    * Nécessite : Rien
+    * Sortie : référence constante vers un string, le message d'erreur
+    * Entraîne : retourne le message qui décrit la cause de l'exception
+    *********************************************************************************/
     const string& EXClireMessage() const {
         return sEXCmessage;
     }
