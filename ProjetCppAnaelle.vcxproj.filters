@@ -35,5 +35,8 @@
     <ClInclude Include="PGrapheOriente.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

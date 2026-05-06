@@ -80,6 +80,18 @@ public:
 	*********************************************************************************/
 	string SOMtoString();
 
+	/*********************************************************************************
+	* SOMAfficher
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : Rien
+	* Entraîne : appel la méthode tostring et affiche son résultat dans la console
+	*********************************************************************************/
+	void SOMAfficher() {
+		cout << this->SOMtoString() << endl;
+	}
+
 // ACCESSEURS
 	unsigned int SOMgetNumero() {
 		return uiSOMNumero;

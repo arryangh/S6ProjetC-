@@ -132,6 +132,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CException.h" />
     <ClInclude Include="PArc.h" />
     <ClInclude Include="PGrapheNonOriente.h" />
     <ClInclude Include="PGrapheOriente.h" />

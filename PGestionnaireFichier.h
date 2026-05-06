@@ -17,6 +17,7 @@
 */
 #include <string>
 #include "PGrapheOriente.h"
+#include "CException.h"
 #include <fstream>
 
 using namespace std;
@@ -116,8 +117,8 @@ void PGestionnaireFichier<S,A>::GSFAfficherContenuFichier(const string& sPath) {
     ifstream fichier(sPath);
 
     if (!fichier) {
-        cerr << "Erreur : impossible d'ouvrir le fichier." << endl;
-        return;
+        throw CException(EXC_FICHIER_INTROUVABLE,
+            "GSFAfficherContenuFichier() : impossible d'ouvrir le fichier : " + sPath);
     }
 
     string ligne;
@@ -131,7 +132,8 @@ void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
     ifstream fichier(sPath);
 
     if (!fichier) {
-        cerr << "CGestionnaireFichier->CollectionDonneesFichierTXT(): Erreur : impossible d'ouvrir le fichier." << endl;
+        throw CException(EXC_FICHIER_INTROUVABLE,
+            "GSFCollectionDonneesFichierTXT() : impossible d'ouvrir le fichier : " + sPath);
     }
 
     string ligne;
@@ -161,14 +163,16 @@ void PGestionnaireFichier<S,A>::GSFCollectionDonneesFichierTXT(string sPath) {
 template <class S, class A>
 bool PGestionnaireFichier<S,A>::GSFVerificationCoheranceDesDonnees() {
     if ((int)vGSFsommets.size() != iGSFnbSommetsAttendu) {
-        cerr << "Erreur : nombre de sommets détectés (" << vGSFsommets.size()
-            << ") ne correspond pas à celui déclaré (" << iGSFnbSommetsAttendu << ")." << endl;
-        return false;
+        throw CException(EXC_DONNEES_INCOHERENTES,
+            "GSFVerificationCoheranceDesDonnees() : nombre de sommets detectes ("
+            + to_string(vGSFsommets.size()) + ") != nombre declare ("
+            + to_string(iGSFnbSommetsAttendu) + ").");
     }
     if ((int)vGSFarcs.size() != iGSFnbArcsAttendu) {
-        cerr << "Erreur : nombre d'arcs détectés (" << vGSFarcs.size()
-            << ") ne correspond pas à celui déclaré (" << iGSFnbArcsAttendu << ")." << endl;
-        return false;
+        throw CException(EXC_DONNEES_INCOHERENTES,
+            "GSFVerificationCoheranceDesDonnees() : nombre d'arcs detectes ("
+            + to_string(vGSFarcs.size()) + ") != nombre declare ("
+            + to_string(iGSFnbArcsAttendu) + ").");
     }
     cout << "2) la coherance des donnees verifie avec succes" << endl;
     return true;

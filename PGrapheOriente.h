@@ -20,6 +20,7 @@
 #include <vector>
 #include "PSommet.h"
 #include "PArc.h"
+#include "CException.h"
 
 template <class S, class A>
 class PGrapheOriente {
@@ -134,6 +135,18 @@ public:
 	*********************************************************************************/
 	string GORtoString();
 
+	/*********************************************************************************
+	* GORAfficher
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : Rien
+	* Entraîne : appel la méthode tostring et affiche son résultat dans la console
+	*********************************************************************************/
+	void GORAfficher() {
+		cout << this->GORtoString() << endl;
+	}
+
 //ACCESSEURS
 
 	/*********************************************************************************
@@ -198,7 +211,8 @@ template <class S, class A>
 void PGrapheOriente<S, A>::GORAjouterSommet(unsigned int uiNumero) {
 	for (S* sommet : vGORSommets) {
 		if (sommet->SOMgetNumero() == uiNumero) {
-			throw runtime_error("Erreur : un sommet avec ce numero existe deja !");
+			throw CException(EXC_SOMMET_DEJA_EXISTANT,
+				"GORAjouterSommet() : un sommet avec le numero " + to_string(uiNumero) + " existe deja.");
 		}
 	}
 	S* s = new S(uiNumero);
@@ -216,13 +230,16 @@ void PGrapheOriente<S, A>::GORAjouterArc(unsigned int uiNumeroDepart, unsigned i
 	}
 	else {
 		if (sommetDep == nullptr && sommetArr == nullptr) {
-			cout << "GrapheOriente.h->AjouterArc(): erreur de création d'arc, >>>les 2 sommets inéxistants<<<" << endl;
+			throw CException(EXC_SOMMET_INTROUVABLE,
+				"GORAjouterArc() : les deux sommets (" + to_string(uiNumeroDepart) + ", " + to_string(uiNumeroArrive) + ") sont inexistants.");
 		}
 		else if (sommetDep == nullptr) {
-			cout << "GrapheOriente.h->AjouterArc(): erreur de création d'arc, sommet de >>>DEPART<<< inéxistants" << endl;
+			throw CException(EXC_SOMMET_INTROUVABLE,
+				"GORAjouterArc() : le sommet de DEPART (" + to_string(uiNumeroDepart) + ") est inexistant.");
 		}
-		else if (sommetArr == nullptr) {
-			cout << "GrapheOriente.h->AjouterArc(): erreur de création d'arc, sommets >>>d'ARRIVE<<< inéxistants" << endl;
+		else {
+			throw CException(EXC_SOMMET_INTROUVABLE,
+				"GORAjouterArc() : le sommet d'ARRIVEE (" + to_string(uiNumeroArrive) + ") est inexistant.");
 		}
 	}
 }
@@ -242,7 +259,8 @@ void PGrapheOriente<S, A>::GORSupprimerSommet(unsigned int uiNumero) {
 		delete sommet; 
 	}
 	else {
-		cout << "PGrapheOriente.h->SupprimerSommet(): sommet " + to_string(uiNumero) + " non trouvé." << endl;
+		throw CException(EXC_SOMMET_INTROUVABLE,
+			"GORSupprimerSommet() : le sommet " + to_string(uiNumero) + " est introuvable.");
 	}
 }
 
@@ -255,7 +273,8 @@ void PGrapheOriente<S, A>::GORSupprimerArc(unsigned int uiNumeroDepart, unsigned
 		delete arc;
 	}
 	else {
-		cout << "PGrapheOriente.h->SupprimerArc(): l'arc (" + to_string(uiNumeroDepart) + ", " + to_string(uiNumeroArrive) + ") non trouvé." << endl;
+		throw CException(EXC_ARC_INTROUVABLE,
+			"GORSupprimerArc() : l'arc (" + to_string(uiNumeroDepart) + ", " + to_string(uiNumeroArrive) + ") est introuvable.");
 	}
 }
 
@@ -264,19 +283,19 @@ void PGrapheOriente<S, A>::GORModifierArc(unsigned int oldND, unsigned int oldNA
 	A* arc = GORTrouverArc(oldND, oldNA);
 
 	if (arc == nullptr) {
-		cout << "GrapheOriente.h->ModifierArc(): l'arc a modifier: (" + to_string(oldND) + ", " + to_string(oldNA) + ") n'existe pas." << endl;
-		return;
+		throw CException(EXC_ARC_INTROUVABLE,
+			"GORModifierArc() : l'arc a modifier (" + to_string(oldND) + ", " + to_string(oldNA) + ") n'existe pas.");
 	}
 
 	A* arcExistant = GORTrouverArc(newND, newNA);
 	if (arcExistant != nullptr) {
-		cout << "GrapheOriente.h->ModifierArc(): l'arc a créer: (" + to_string(newND) + ", " + to_string(newNA) + ") existe déjà." << endl;
-		return;
+		throw CException(EXC_ARC_DEJA_EXISTANT,
+			"GORModifierArc() : l'arc cible (" + to_string(newND) + ", " + to_string(newNA) + ") existe deja.");
 	}
 
 	if (GORTrouverSommet(newND) == nullptr || GORTrouverSommet(newNA) == nullptr) {
-		cout << "GrapheOriente.h->ModifierArc(): un des sommets de destination n'existe pas." << endl;
-		return;
+		throw CException(EXC_SOMMET_INTROUVABLE,
+			"GORModifierArc() : un des sommets de destination n'existe pas.");
 	}
 
 	GORSupprimerArc(oldND, oldNA);
