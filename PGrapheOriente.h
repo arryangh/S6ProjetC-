@@ -170,7 +170,7 @@ public:
 	* Entraîne : ajoute le pointeur a au vecteur vGORArcs sans créer de nouvel objet
 	*********************************************************************************/
 	void GORsetvArc(A* a) {
-		vGORSommets.push_back(a);
+		vGORArcs.push_back(a);
 	}
 	
 private:
