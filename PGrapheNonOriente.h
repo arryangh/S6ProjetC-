@@ -68,6 +68,11 @@ public:
     *            PGrapheOriente.
     *********************************************************************************/
     void GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive);
+
+    bool GNOestCouplage(vector<A*> C);
+
+
+    bool GNOTestCouplage(vector<A*> C);
 };
 
 template <class S, class A>
@@ -86,6 +91,57 @@ template <class S, class A>
 void PGrapheNonOriente<S, A>::GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive) {
     PGrapheOriente<S, A>::GORSupprimerArc(uiNumeroDepart, uiNumeroArrive);
     PGrapheOriente<S, A>::GORSupprimerArc(uiNumeroArrive, uiNumeroDepart);
+}
+
+template <class S, class A>
+bool PGrapheNonOriente<S, A>::GNOestCouplage(vector<A*> C) {
+    for (int index_1 = 0; index_1 < C.size(); index_1++) {
+        for (int index_2 = index_1 + 1; index_2 < C.size(); index_2++) {
+            A* a1 = C[index_1];
+            A* a2 = C[index_2];
+            if (a1->ARCLireSommetDep() == a2->ARCLireSommetDep()
+                || a1->ARCLireSommetDep() == a2->ARCLireSommetArr()
+                || a1->ARCLireSommetArr() == a2->ARCLireSommetDep()
+                || a1->ARCLireSommetArr() == a2->ARCLireSommetArr()) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+template <class S, class A>
+bool PGrapheNonOriente<S, A>::GNOTestCouplage(vector<A*> C) {
+    vector<A*> vArc_prive_C;
+    if (!GNOestCouplage(C)) {
+        cout << "C n'est pas un couplage." << endl;
+        return false;
+    }
+    else {
+        for (int index_1 = 0; index_1 < this->vGORArcs.size(); index_1++) {
+            bool estDansC = false;
+            for (int index_2 = 0; index_2 < C.size(); index_2++) {
+                if (this->vGORArcs[index_1] == C[index_2]) {
+                    estDansC = true;
+                }
+            }
+            if (!estDansC) {
+                vector<A*> C_prime = C;
+                vArc_prive_C.push_back(this->vGORArcs[index_1]);
+                C_prime.push_back(this->vGORArcs[index_1]);
+                if (GNOestCouplage(C_prime)) {
+                    cout << "C_prime contient : ";
+                    for (int i = 0; i < (int)C_prime.size(); i++) {
+                        cout << "(" << C_prime[i]->ARCLireSommetDep() << "," << C_prime[i]->ARCLireSommetArr() << ") ";
+                    }
+                    cout << endl;
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
 
 #endif // !PGrapheNonOriente_H

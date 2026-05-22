@@ -172,6 +172,14 @@ public:
 	void GORsetvArc(A* a) {
 		vGORArcs.push_back(a);
 	}
+
+
+	vector<A*>& GORgetArcs() {
+		return vGORArcs;
+	}
+
+
+	
 	
 private:
 	/*********************************************************************************

@@ -24,6 +24,7 @@
     <ProjectGuid>{0d39da51-f9fc-4ffc-904c-bfcaacdbe89a}</ProjectGuid>
     <RootNamespace>ProjetCppAnaelle</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>ProjetCppAnaelleAryan</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

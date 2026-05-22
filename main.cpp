@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "PArc.h"
 #include "PSommet.h"
 #include "PGrapheOriente.h"
@@ -6,6 +7,7 @@
 #include "PGestionnaireFichier.h"
 #include "CException.h"
 #include <filesystem>
+
 
 using namespace std;
 
@@ -324,6 +326,43 @@ void testExceptions() {
 	testEXC6_DonneesIncoherentes();
 }
 
+void testGNOCouplage() {
+	afficherText("==================================  TEST COUPLAGE ===================================");
+
+	PGrapheNonOriente<MonSommet, MonArc>* GN = new PGrapheNonOriente<MonSommet, MonArc>();
+
+	GN->GORAjouterSommet(1);
+	GN->GORAjouterSommet(2);
+	GN->GORAjouterSommet(3);
+	GN->GORAjouterSommet(4);
+	GN->GORAjouterSommet(5);
+	GN->GORAjouterSommet(6);
+	GN->GORAjouterSommet(7);
+	GN->GORAjouterSommet(8);
+
+	GN->GORAjouterArc(1, 2);
+	GN->GORAjouterArc(1, 3);
+	GN->GORAjouterArc(1, 4);
+	GN->GORAjouterArc(2, 5);
+	GN->GORAjouterArc(3, 6);
+	GN->GORAjouterArc(4, 7);
+	GN->GORAjouterArc(5, 6);
+	GN->GORAjouterArc(5, 8);
+	GN->GORAjouterArc(6, 8);
+	GN->GORAjouterArc(7, 8);
+
+	GN->GORAfficher();
+
+	afficherText("================================== TEST COUPLAGE MAXIMAL 1 ==================================");
+	vector<MonArc*> C1;
+	C1.push_back(GN->GORgetArcs()[0]);
+	C1.push_back(GN->GORgetArcs()[8]);
+	C1.push_back(GN->GORgetArcs()[10]);
+	C1.push_back(GN->GORgetArcs()[14]);
+	bool resultat1 = GN->GNOTestCouplage(C1);
+	cout << resultat1 << endl;
+}
+
 void fonctionPrincipaleSujet(string sPath) {
 	afficherText("==================================  TEST DEMANDE DANS LE SUJET ===================================");
 	try {
@@ -353,6 +392,7 @@ int main() {
 
 	//testClasses();
 	//testExceptions();
+	testGNOCouplage();
 	
 	cin.get();
 	return 0;
