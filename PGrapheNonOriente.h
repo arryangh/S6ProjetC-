@@ -131,11 +131,11 @@ bool PGrapheNonOriente<S, A>::GNOTestCouplage(vector<A*> C) {
                 vArc_prive_C.push_back(this->vGORArcs[index_1]);
                 C_prime.push_back(this->vGORArcs[index_1]);
                 if (GNOestCouplage(C_prime)) {
-                    cout << "C_prime contient : ";
+                    cout << "Il y a un couplage de cardinalité supérieure : \nC_prime = {";
                     for (int i = 0; i < (int)C_prime.size(); i++) {
-                        cout << "(" << C_prime[i]->ARCLireSommetDep() << "," << C_prime[i]->ARCLireSommetArr() << ") ";
+                        cout << " (" << C_prime[i]->ARCLireSommetDep() << "," << C_prime[i]->ARCLireSommetArr() << ")";
                     }
-                    cout << endl;
+                    cout << " }" << endl;
                     return false;
                 }
             }
