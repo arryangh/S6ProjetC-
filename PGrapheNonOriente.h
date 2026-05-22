@@ -69,9 +69,41 @@ public:
     *********************************************************************************/
     void GORSupprimerArc(unsigned int uiNumeroDepart, unsigned int uiNumeroArrive);
 
+    /*********************************************************************************
+    * GNOestCouplage
+    * ********************************************************************************
+    * Entrée : C, vector<A*>, un ensemble d'arcs à tester
+    * Nécessite : Rien
+    * Sortie : bool, true si C est un couplage valide, false sinon
+    * Entraîne : vérifie que pour toute paire d'arcs (a1, a2) de C, les deux arcs
+    *            ne partagent aucun sommet en commun (ni en départ ni en arrivée).
+    *            Si deux arcs partagent un sommet, retourne false immédiatement.
+    *            Si aucune paire d'arcs ne partage de sommet, retourne true.
+    *********************************************************************************/
     bool GNOestCouplage(vector<A*> C);
 
-
+    /*********************************************************************************
+    * GNOTestCouplage
+    * ********************************************************************************
+    * Entrée : C, vector<A*>, un ensemble d'arcs à tester
+    * Nécessite : Rien
+    * Sortie : bool, true si C est un couplage de taille maximale (heuristique),
+    *          false sinon
+    * Entraîne : effectue les vérifications en trois étapes :
+    *            1) vérifie que C est un couplage valide via GNOestCouplage(C).
+    *               Si ce n'est pas le cas, affiche un message et retourne false.
+    *            2) construit l'ensemble A\C, c'est-à-dire les arcs du graphe
+    *               absents de C. (A privé de C)
+    *            3) tente d'agrandir C en ajoutant chaque arc de A\C un par un.
+    *               Si un arc peut être ajouté à C tout en maintenant un couplage
+    *               valide (C' = C + {arc} est un couplage), alors C n'est pas
+    *               maximal : affiche le couplage de cardinalité supérieure trouvé
+    *               et retourne false.
+    *            Si aucun arc de A\C ne peut agrandir C, retourne true.
+    * Remarque : il s'agit d'une heuristique. Si la fonction retourne false, on est
+    *            certain que C n'est pas maximal. Si elle retourne true, on ne peut
+    *            pas conclure avec certitude que C est maximal.
+    *********************************************************************************/
     bool GNOTestCouplage(vector<A*> C);
 };
 

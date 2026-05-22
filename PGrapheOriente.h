@@ -173,14 +173,18 @@ public:
 		vGORArcs.push_back(a);
 	}
 
-
-	vector<A*>& GORgetArcs() {
+	/*********************************************************************************
+	* GORgetArcs
+	* ********************************************************************************
+	* Entrée : Rien
+	* Nécessite : Rien
+	* Sortie : référence vers le vector des arcs du graphe
+	* Entraîne : permet d'accéder directement au vecteur vGORArcs du graphe
+	*********************************************************************************/
+	vector<A*> GORgetArcs() {
 		return vGORArcs;
 	}
 
-
-	
-	
 private:
 	/*********************************************************************************
 	* GORTrouverSommet

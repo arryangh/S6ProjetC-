@@ -360,7 +360,7 @@ void testGNOCouplage() {
 	C1.push_back(GN->GORgetArcs()[10]);
 	C1.push_back(GN->GORgetArcs()[14]);
 	bool resultat1 = GN->GNOTestCouplage(C1);
-	cout << "Résultat test couplage maximal 1 : " << resultat1 << " (si 1 = true sinon 0 = false) " << endl;
+	cout << "Résultat test couplage maximal 1 : " << resultat1 << " (si 1 = true sinon 0 = false)\n " << endl;
 
 	afficherText("================================== TEST COUPLAGE MAXIMAL 2 ==================================");
 	vector<MonArc*> C2;
@@ -369,7 +369,7 @@ void testGNOCouplage() {
 	C2.push_back(GN->GORgetArcs()[10]);
 	C2.push_back(GN->GORgetArcs()[14]);
 	bool resultat2 = GN->GNOTestCouplage(C2);
-	cout << "Résultat test couplage maximal 2 : " << resultat2 << " (si 1 = true sinon 0 = false) " << endl;
+	cout << "Résultat test couplage maximal 2 : " << resultat2 << " (si 1 = true sinon 0 = false)\n " << endl;
 
 	afficherText("================================== TEST COUPLAGE MAXIMAL 3 ==================================");
 	vector<MonArc*> C3;
@@ -377,7 +377,7 @@ void testGNOCouplage() {
 	C3.push_back(GN->GORgetArcs()[8]);
 	C3.push_back(GN->GORgetArcs()[10]);
 	bool resultat3 = GN->GNOTestCouplage(C3);
-	cout << "Résultat test couplage maximal 3 : " << resultat3 << " (si 1 = true sinon 0 = false) " << endl;
+	cout << "Résultat test couplage maximal 3 : " << resultat3 << " (si 1 = true sinon 0 = false)\n " << endl;
 
 
 }
@@ -404,10 +404,12 @@ void fonctionPrincipaleSujet(string sPath) {
 int main() {
 	string sPath;
 
+	/*
 	cout << "Entrez le chemin du fichier : ";
 	getline(cin, sPath);
 
 	fonctionPrincipaleSujet(sPath);
+	*/
 
 	//testClasses();
 	//testExceptions();
