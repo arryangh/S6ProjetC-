@@ -127,10 +127,10 @@ void PGrapheNonOriente<S, A>::GORSupprimerArc(unsigned int uiNumeroDepart, unsig
 
 template <class S, class A>
 bool PGrapheNonOriente<S, A>::GNOestCouplage(vector<A*> C) {
-    for (int index_1 = 0; index_1 < C.size(); index_1++) {
-        for (int index_2 = index_1 + 1; index_2 < C.size(); index_2++) {
-            A* a1 = C[index_1];
-            A* a2 = C[index_2];
+    for (int iArc = 0; iArc < C.size(); iArc++) {
+        for (int iC = iArc + 1; iC < C.size(); iC++) {
+            A* a1 = C[iArc];
+            A* a2 = C[iC];
             if (a1->ARCLireSommetDep() == a2->ARCLireSommetDep()
                 || a1->ARCLireSommetDep() == a2->ARCLireSommetArr()
                 || a1->ARCLireSommetArr() == a2->ARCLireSommetDep()
@@ -150,16 +150,16 @@ bool PGrapheNonOriente<S, A>::GNOTestCouplage(vector<A*> C) {
         return false;
     }
     else {
-        for (int index_1 = 0; index_1 < this->vGORArcs.size(); index_1++) {
-            A* arc = this->vGORArcs[index_1];
+        for (int iArc = 0; iArc < this->vGORArcs.size(); iArc++) {
+            A* arc = this->vGORArcs[iArc];
             
             if (arc->ARCLireSommetDep() >= arc->ARCLireSommetArr()) {
                 continue;
             }
 
             bool estDansC = false;
-            for (int index_2 = 0; index_2 < C.size(); index_2++) {
-                if (arc == C[index_2]) {
+            for (int iC = 0; iC < C.size(); iC++) {
+                if (arc == C[iC]) {
                     estDansC = true;
                     break;
                 }
