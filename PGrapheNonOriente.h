@@ -145,23 +145,28 @@ bool PGrapheNonOriente<S, A>::GNOestCouplage(vector<A*> C) {
 
 template <class S, class A>
 bool PGrapheNonOriente<S, A>::GNOTestCouplage(vector<A*> C) {
-    vector<A*> vArc_prive_C;
     if (!GNOestCouplage(C)) {
         cout << "C n'est pas un couplage." << endl;
         return false;
     }
     else {
         for (int index_1 = 0; index_1 < this->vGORArcs.size(); index_1++) {
+            A* arc = this->vGORArcs[index_1];
+            
+            if (arc->ARCLireSommetDep() >= arc->ARCLireSommetArr()) {
+                continue;
+            }
+
             bool estDansC = false;
             for (int index_2 = 0; index_2 < C.size(); index_2++) {
-                if (this->vGORArcs[index_1] == C[index_2]) {
+                if (arc == C[index_2]) {
                     estDansC = true;
+                    break;
                 }
             }
             if (!estDansC) {
                 vector<A*> C_prime = C;
-                vArc_prive_C.push_back(this->vGORArcs[index_1]);
-                C_prime.push_back(this->vGORArcs[index_1]);
+                C_prime.push_back(arc);
                 if (GNOestCouplage(C_prime)) {
                     cout << "Il y a un couplage de cardinalité supérieure : \nC_prime = {";
                     for (int i = 0; i < (int)C_prime.size(); i++) {
